@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   has_many :daily_log_entries, dependent: :destroy
   has_many :microdose_log_entries, dependent: :destroy
+  belongs_to :protocol
 
   has_secure_password
 
@@ -8,5 +9,4 @@ class User < ApplicationRecord
   validates_uniqueness_of :email
   
   enum role: %w(default manager admin)
-
 end
