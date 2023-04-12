@@ -4,6 +4,8 @@ describe User, type: :model do
   describe "relationships" do
     it {should have_many :daily_log_entries}
     it {should have_many :microdose_log_entries}
+    it {should belong_to :protocol}
+
   end
 
   describe "validations" do
@@ -12,7 +14,6 @@ describe User, type: :model do
     it { should validate_presence_of :address }
     it { should validate_presence_of :password }
     it { should validate_uniqueness_of :email }
-
     it { should have_secure_password}
   end
 end
