@@ -1,9 +1,10 @@
 version: 2.1
 orbs:
   ruby: circleci/ruby@1.4.0
+  heroku: circleci/heroku@1.2.6
 
 jobs:
-  build:
+  build_and_test:
     working_directory: ~/psydiary_back_end # THIS SHOULD BE NAME OF YOUR APP
     docker:
       - image: cimg/ruby:3.1.1
@@ -25,3 +26,20 @@ jobs:
       - checkout
       - run: bundle install --path vendor/bundle
       - run: bundle exec rspec
+  deploy: # this can be any name you choose
+    executor: heroku/default
+    steps:
+      - attach_workspace:
+          at: ~/psydiary_back_end
+      - heroku/deploy-via-git:
+          force: true
+workflows:
+  test_my_app:
+    jobs:
+      - build_and_test
+      - deploy:
+          requires:
+            - build_and_test # only deploy if the build_and_test job has completed
+          filters:
+            branches:
+              only: main # only deploy when on main
