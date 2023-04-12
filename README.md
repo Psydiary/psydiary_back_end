@@ -149,10 +149,10 @@ _Follow the steps below to install and set up this app._
    git clone https://github.com/Bobsters986/psydiary_back_end
    ```
 3. In your terminal, run the following commands;
-  ```sh
-  bundle install
-  rails db:{drop,create,migrate,seed}
-  ```
+    ```sh
+    bundle install
+    rails db:{drop,create,migrate,seed}
+    ```
 4. Enter your API in `application.yml`
    ```ruby
    API_KEY = 'ENTER YOUR API';
@@ -176,15 +176,20 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 <!-- ROADMAP -->
 ## Roadmap
 
-- [x] Add Changelog
-- [x] Add back to top links
-- [ ] Add Additional Templates w/ Examples
-- [ ] Add "components" document to easily copy & paste sections of the readme
-- [ ] Multi-language Support
-    - [ ] Chinese
-    - [ ] Spanish
-
-See the [open issues](https://github.com/othneildrew/Best-README-Template/issues) for a full list of proposed features (and known issues).
+- [x] Add README
+- [ ] Add Root Page
+- [ ] Add Learn More Page
+- [ ] Add New User Page
+- [ ] Add User Login
+- [ ] User Dashboard
+- [ ] Protocol Show Page
+- [ ] User Edit Page
+- [ ] New Daily Log
+- [ ] New Microdose Diary
+- [ ] Daily Log/Microdose Index
+- [ ] Daily Log Show Page
+- [ ] Dose Show Page
+- [ ] Resources/Discover Page
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
