@@ -8,8 +8,6 @@ class CreateProtocols < ActiveRecord::Migration[7.0]
       t.string :description
       t.string :protocol_duration
       t.string :break_duration
-      
-
       t.timestamps
     end
   end
