@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_12_175535) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_12_191633) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -46,13 +46,27 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_12_175535) do
     t.index ["user_id"], name: "index_microdose_log_entries_on_user_id"
   end
 
+  create_table "protocols", force: :cascade do |t|
+    t.string "name"
+    t.integer "days_between_dose"
+    t.string "dose_days"
+    t.float "dosage"
+    t.string "description"
+    t.string "protocol_duration"
+    t.string "break_duration"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
     t.string "address"
     t.string "password_digest"
+    t.bigint "protocol_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["protocol_id"], name: "index_users_on_protocol_id"
   end
 
 end

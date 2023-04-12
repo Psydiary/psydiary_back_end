@@ -4,6 +4,8 @@ describe User, type: :model do
   describe "relationships" do
     it {should have_many :daily_log_entries}
     it {should have_many :microdose_log_entries}
+    it {should belong_to :protocol}
+
   end
 
   describe "validations" do
