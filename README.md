@@ -30,8 +30,8 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+  <a href="https:/https://github.com/Bobsters986/psydiary_back_end">
+    <img src="![Logo](https://user-images.githubusercontent.com/116703107/231324854-f10370cc-90a6-4bfd-bd75-45017fc3cb31.png)" alt="Logo" width="80" height="80">
   </a>
 
   <h3 align="center">Best-README-Template</h3>
