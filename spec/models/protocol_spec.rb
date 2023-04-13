@@ -2,10 +2,11 @@ require 'rails_helper'
 
 describe Protocol do
   describe 'relationships' do
-    it {should have_many :user}
+    it {should have_many :users}
   end
 
   describe 'validations' do
+    it { should validate_presence_of :name }
     it { should validate_presence_of :dosage }
     it { should validate_presence_of :days_between_dose }
     it { should validate_presence_of :dose_days }
