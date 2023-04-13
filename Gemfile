@@ -43,6 +43,7 @@ group :development, :test do
   gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'main'
   gem "pry"
   gem "rspec-rails"
+  gem 'net-http'
 end
 
 group :development do
@@ -51,5 +52,9 @@ group :development do
 end
 
 group :test do
+  gem 'capybara'
+  gem 'simplecov'
   gem "shoulda-matchers", "~> 5.0"
 end
+
+gem 'figaro'
