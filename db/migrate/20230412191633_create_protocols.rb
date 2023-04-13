@@ -6,8 +6,9 @@ class CreateProtocols < ActiveRecord::Migration[7.0]
       t.string :dose_days
       t.float :dosage
       t.string :description
-      t.string :protocol_duration
-      t.string :break_duration
+      t.integer :protocol_duration
+      t.integer :break_duration
+      t.string :other_notes
       t.timestamps
     end
   end
