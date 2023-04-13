@@ -26,10 +26,13 @@ RSpec.describe "Protocols API", type: :request do
     end
 
     context "when unsuccessful" do
-      xit "returns a 404 error" do
+      it "returns an error message for invalid id" do
         get "/api/v1/protocols/986986"
 
-        expect(response.status).to eq(404)
+        parsed = JSON.parse(response.body, symbolize_names: true)
+
+        expect(response).to have_http_status(404)
+        expect(parsed[:errors]).to eq("Couldn't find Protocol with 'id'=986986")
       end
     end
   end
