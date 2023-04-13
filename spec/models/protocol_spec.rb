@@ -8,8 +8,8 @@ describe Protocol do
   describe 'validations' do
     it { should validate_presence_of :name }
     it { should validate_presence_of :dosage }
-    it { should validate_presence_of :days_between_dose }
-    it { should validate_presence_of :dose_days }
+    it { should validate_numericality_of :dosage }
+    it { should validate_numericality_of :days_between_dose }
     xit { should validate_presence_of :daysbetween_xor_dosedays }
     it { should validate_presence_of :protocol_duration }
     it { should validate_presence_of :break_duration }
