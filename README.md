@@ -151,6 +151,7 @@ _Follow the steps below to install and set up this app._
 3. In your terminal, run the following commands;
     ```sh
     bundle install
+    bundle exec figaro install
     rails db:{drop,create,migrate,seed}
     ```
 4. Enter your API in `application.yml`

@@ -40,6 +40,7 @@ gem "faraday" # https://github.com/lostisland/faraday
 gem "figaro" # https://github.com/laserlemon/figaro
 gem "jsonapi-serializer" # https://github.com/jsonapi-serializer/jsonapi-serializer#installation
 
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
