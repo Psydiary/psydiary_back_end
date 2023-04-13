@@ -38,7 +38,7 @@ gem "bootsnap", require: false
 
 gem "faraday" # https://github.com/lostisland/faraday
 gem "figaro" # https://github.com/laserlemon/figaro
-gem "jasonapi-serializer" # https://github.com/jsonapi-serializer/jsonapi-serializer#installation
+gem "jsonapi-serializer" # https://github.com/jsonapi-serializer/jsonapi-serializer#installation
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
