@@ -52,8 +52,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_13_153941) do
     t.string "dose_days"
     t.float "dosage"
     t.string "description"
-    t.string "protocol_duration"
-    t.string "break_duration"
+    t.integer "protocol_duration"
+    t.integer "break_duration"
+    t.string "other_notes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -61,7 +62,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_13_153941) do
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
-    t.string "address"
     t.string "password_digest"
     t.bigint "protocol_id"
     t.datetime "created_at", null: false
@@ -69,4 +69,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_13_153941) do
     t.boolean "data_sharing"
     t.index ["protocol_id"], name: "index_users_on_protocol_id"
   end
+
 end
