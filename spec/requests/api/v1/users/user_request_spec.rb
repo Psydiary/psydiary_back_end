@@ -44,4 +44,39 @@ describe 'Users API', type: :request do
       expect(json[:errors]).to eq(["Must be in a state where psyilocybin use is legal to create an account"])
     end
   end
+
+  context '#show' do
+    before :each do
+      @p1 = Protocol.create!(name: "Stamets", description: "words", dose_days:"Thursday, Friday, Saturday, Sunday", dosage: 0.1, protocol_duration: 4, break_duration: 4, other_notes: "Take with 500mg of Lion's Mane extract powder and 100mg of Niacin Vit B3")
+      @u1 = User.create!(name: "Existing User", email: "existing_user@gmail.com", password: "1234", protocol_id: @p1.id, ip_address: "2601:282:4300:aef0:3c11:257d:152b:f5ad")
+    end
+
+    context "when successful" do
+      it "returns a user" do
+        get "/api/v1/users/#{@u1.id}"
+
+        expect(response.status).to eq(200)
+
+        json = JSON.parse(response.body, symbolize_names: true)
+
+        expect(json[:data].keys).to include(:id, :type, :attributes)
+        expect(json[:data][:id]).to eq(@u1.id.to_s)
+        expect(json[:data][:type]).to eq("user")
+        expect(json[:data][:attributes].keys).to include(:name, :email, :protocol_id, :data_sharing)
+        expect(json[:data][:attributes][:name]).to eq(@u1[:name])
+      end
+    end
+
+    context "when unsuccessful" do
+      it "returns an error message" do
+        get "/api/v1/users/98689"
+
+        expect(response.status).to eq(404)
+
+        json = JSON.parse(response.body, symbolize_names: true)
+
+        expect(json[:errors]).to eq("Couldn't find User with 'id'=98689")
+      end
+    end
+  end
 end
