@@ -56,7 +56,7 @@ describe 'Users API', type: :request do
       json = JSON.parse(response.body, symbolize_names: true)
 
       expect(response.status).to eq(200)
-      expect(json[:attributes].keys).to include(:user_id)
+      expect(json[:data][:attributes].keys).to include(:name ,:email, :protocol_id, :data_sharing)
     end
 
     it 'will send back an error message if user email doesnt exist' do
@@ -64,8 +64,7 @@ describe 'Users API', type: :request do
       json = JSON.parse(response.body, symbolize_names: true)
 
       expect(response.status).to eq(404)
-      expect(json[:message]).to eq("Could not login")
-      expect(json[:errors].keys).to include("Account not found")
+      expect(json[:errors]).to include("Account not found")
     end
 
     it 'will send back an error message if user password is wrong' do
@@ -73,8 +72,7 @@ describe 'Users API', type: :request do
       json = JSON.parse(response.body, symbolize_names: true)
 
       expect(response.status).to eq(404)
-      expect(json[:message]).to eq("Could not login")
-      expect(json[:errors].keys).to include("Account not found")
+      expect(json[:errors]).to include("Incorrect password")
     end
   end
 end
