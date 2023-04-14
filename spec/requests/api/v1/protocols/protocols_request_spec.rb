@@ -62,4 +62,39 @@ RSpec.describe "Protocols API", type: :request do
       end
     end
   end
+
+  context "#create" do
+    before do
+      3.times do
+        create(:protocol)
+      end
+
+      @protocol_params = ({
+        id: 60,
+        name: "Noe Pagac",
+        days_between_dose: 4,
+        dose_days: nil,
+        dosage: 0.33,
+        description: "treats allergy symptoms",
+        protocol_duration: 2,
+        break_duration: 4,
+        other_notes: "Vitae facere voluptatum pariatur quo.",
+      })
+      @headers = {"CONTENT_TYPE" => "application/json"}
+    end
+
+    it "creates a new protocol" do
+      expect(Protocol.count).to eq(3)
+
+      post "/api/v1/protocols", headers: @headers, params: @protocol_params, as: :json
+
+      @created_protocol = Protocol.last
+
+      expect(response.status).to eq(201)
+      expect(Protocol.count).to eq(4)
+
+  
+
+    end
+  end
 end
