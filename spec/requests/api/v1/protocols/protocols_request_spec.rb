@@ -78,8 +78,9 @@ RSpec.describe "Protocols API", type: :request do
         description: "treats allergy symptoms",
         protocol_duration: 2,
         break_duration: 4,
-        other_notes: "Vitae facere voluptatum pariatur quo.",
+        other_notes: "Vitae facere voluptatum pariatur quo."
       })
+      
       @headers = {"CONTENT_TYPE" => "application/json"}
     end
 
@@ -88,13 +89,37 @@ RSpec.describe "Protocols API", type: :request do
 
       post "/api/v1/protocols", headers: @headers, params: @protocol_params, as: :json
 
-      @created_protocol = Protocol.last
-
       expect(response.status).to eq(201)
       expect(Protocol.count).to eq(4)
 
-  
+      parsed = JSON.parse(response.body, symbolize_names: true)
 
+      data = parsed[:data]
+      attributes = data[:attributes]
+
+      expect(data.keys).to eq([:id, :type, :attributes])
+      expect(attributes.keys).to eq([
+        :name, 
+        :days_between_dose, 
+        :dose_days, 
+        :dosage,
+        :description,
+        :protocol_duration,
+        :break_duration,
+        :other_notes
+      ])
+
+      expect(data[:id]).to be_a String
+      expect(data[:type]).to be_a String
+      expect(data[:attributes]).to be_a Hash
+      expect(attributes[:name]).to be_a String
+      expect(attributes[:days_between_dose]).to be_an(Integer).or be_nil
+      expect(attributes[:dose_days]).to be_a(String).or be_nil
+      expect(attributes[:dosage]).to be_a(Float)
+      expect(attributes[:description]).to be_a(String)
+      expect(attributes[:protocol_duration]).to be_an(Integer)
+      expect(attributes[:break_duration]).to be_an(Integer)
+      expect(attributes[:other_notes]).to be_a(String).or be_nil
     end
   end
 end
