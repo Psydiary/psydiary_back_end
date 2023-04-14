@@ -16,6 +16,7 @@ jobs:
           PGHOST: localhost
           PGUSER: psydiary_back_end # THIS SHOULD BE NAME OF YOUR APP
           RAILS_ENV: test
+          # ipgeo_api_key: ENV['ipgeo_api_key']
       - image: postgres:13.2
         environment:
           POSTGRES_USER: psydiary_back_end # THIS SHOULD BE NAME OF YOUR APP
