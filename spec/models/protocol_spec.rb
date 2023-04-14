@@ -31,4 +31,35 @@ describe Protocol do
       end
     end
   end
+
+  describe 'class methods' do
+    describe '.default_protocols' do
+      it 'returns the default protocol' do
+        default_1 = Protocol.create(name: "Default Protocol 1", description: "This is the default protocol", dosage: 1.5, days_between_dose: 2, protocol_duration: 4, break_duration: 1, other_notes: "Optional extra notes", status: 0)
+        default_2 = Protocol.create(name: "Default Protocol 2", description: "This is another default protocol", dosage: 1.75, days_between_dose: 3, protocol_duration: 6, break_duration: 2, other_notes: "Optional extra notes", status: 0)
+        custom_1 = Protocol.create(name: "Custom Protocol ", description: "This is a custom protocol", dosage: 1.25, days_between_dose: 2, protocol_duration: 8, break_duration: 2, other_notes: "Optional extra notes", status: 1)
+
+        expect(Protocol.default_protocols).to eq([default_1, default_2])
+        expect(Protocol.default_protocols).to_not include(custom_1)
+
+        default_3 = Protocol.create(name: "Default Protocol 3", description: "This is a third default protocol", dosage: 2.25, days_between_dose: 2, protocol_duration: 5, break_duration: 1, other_notes: "Optional extra notes", status: 0)
+
+        expect(Protocol.default_protocols).to eq([default_1, default_2, default_3])
+      end
+    end
+
+    describe '.custom_protocols' do
+      it 'returns the custom protocols' do
+        default_1 = Protocol.create(name: "Default Protocol 1", description: "This is the default protocol", dosage: 1.5, days_between_dose: 2, protocol_duration: 4, break_duration: 1, other_notes: "Optional extra notes", status: 0)
+        custom_1 = Protocol.create(name: "Custom Protocol ", description: "This is a custom protocol", dosage: 1.25, days_between_dose: 2, protocol_duration: 8, break_duration: 2, other_notes: "Optional extra notes", status: 1)
+
+        expect(Protocol.custom_protocols).to eq([custom_1])
+        expect(Protocol.custom_protocols).to_not include(default_1)
+
+        custom_2 = Protocol.create(name: "Custom Protocol 2", description: "This is another custom protocol", dosage: 1.25, days_between_dose: 2, protocol_duration: 8, break_duration: 2, other_notes: "Optional extra notes", status: 1)
+
+        expect(Protocol.custom_protocols).to eq([custom_1, custom_2])
+      end
+    end
+  end
 end

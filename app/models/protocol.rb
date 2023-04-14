@@ -10,6 +10,16 @@ class Protocol < ApplicationRecord
   
   has_many :users
 
+  enum status: %w(default custom)
+
+  def self.default_protocols
+    where(status: 0)
+  end
+
+  def self.custom_protocols
+    where(status: 1)
+  end
+
   private
 
   def daysbetween_xor_dosedays
