@@ -13,6 +13,6 @@ Protocol.create!(name: "Fadiman", description: fadiman_description, days_between
 Protocol.create!(name: "Stamets", description: stamets_description, dose_days:"Thursday, Friday, Saturday, Sunday", dosage: 0.1, protocol_duration: 4, break_duration: 4, other_notes: "Take with 500mg of Lion's Mane extract powder and 100mg of Niacin Vit B3")
 Protocol.create!(name: "Nightcap", description: nightcap_description, days_between_dose: 3, dosage: 0.2, protocol_duration: 4, break_duration: 3, other_notes: "Taken in the evening")
 
-User.create!(name: "Tori Enyart", email: "torienyart@gmail.com", password: "1234", protocol_id: 1)
-User.create!(name: "Bobby Luly", email: "bobbyluly@gmail.com", password: "5678", protocol_id: 2)
+User.create!(name: "Tori Enyart", email: "torienyart@gmail.com", password: "1234", protocol_id: 1, ip_address: "73.153.161.252")
+User.create!(name: "Bobby Luly", email: "bobbyluly@gmail.com", password: "5678", protocol_id: 2, ip_address: "73.153.161.252")
 
