@@ -44,4 +44,37 @@ describe 'Users API', type: :request do
       expect(json[:errors]).to eq(["Must be in a state where psyilocybin use is legal to create an account"])
     end
   end
+
+  describe 'login a user' do
+    before :each do
+      @p1 = Protocol.create!(name: "Stamets", description: "words", dose_days:"Thursday, Friday, Saturday, Sunday", dosage: 0.1, protocol_duration: 4, break_duration: 4, other_notes: "Take with 500mg of Lion's Mane extract powder and 100mg of Niacin Vit B3")
+      @u1 = User.create!(name: "Existing User", email: "existing_user@gmail.com", password: "1234", protocol_id: @p1.id, ip_address: "73.153.161.252")
+    end
+
+    it 'POST /login' do
+      post "/api/v1/login", params: {"email": @u1.email, "password": @u1.password}
+      json = JSON.parse(response.body, symbolize_names: true)
+
+      expect(response.status).to eq(200)
+      expect(json[:attributes].keys).to include(:user_id)
+    end
+
+    it 'will send back an error message if user email doesnt exist' do
+      post "/api/v1/login", params: {"email": "b", "password": @u1.password}
+      json = JSON.parse(response.body, symbolize_names: true)
+
+      expect(response.status).to eq(404)
+      expect(json[:message]).to eq("Could not login")
+      expect(json[:errors].keys).to include("Account not found")
+    end
+
+    it 'will send back an error message if user password is wrong' do
+      post "/api/v1/login", params: {"email": @u1.email, "password": "hello world"}
+      json = JSON.parse(response.body, symbolize_names: true)
+
+      expect(response.status).to eq(404)
+      expect(json[:message]).to eq("Could not login")
+      expect(json[:errors].keys).to include("Account not found")
+    end
+  end
 end
