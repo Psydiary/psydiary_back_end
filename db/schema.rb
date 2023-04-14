@@ -63,6 +63,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_13_153941) do
     t.string "name"
     t.string "email"
     t.string "password_digest"
+    t.string "ip_address"
     t.bigint "protocol_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
