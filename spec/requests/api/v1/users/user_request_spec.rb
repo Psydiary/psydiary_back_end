@@ -11,7 +11,7 @@ describe 'Users API', type: :request do
       @u4 = attributes_for(:user, protocol_id: @p1.id, ip_address: "69.146.140.81")
     end
 
-    it "POST /items" do
+    it "POST /users" do
       post "/api/v1/users", params: @u1
       json = JSON.parse(response.body, symbolize_names: true)
 
