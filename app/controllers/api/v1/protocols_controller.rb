@@ -9,7 +9,7 @@ class Api::V1::ProtocolsController < ApplicationController
 
   def create
     protocol = Protocol.new(protocol_params)
-    require 'pry'; binding.pry
+    
     if protocol.valid?
       protocol.save
       render json: ProtocolSerializer.new(Protocol.find(protocol.id)), status: 201
