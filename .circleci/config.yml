@@ -2,7 +2,11 @@ version: 2.1
 orbs:
   ruby: circleci/ruby@1.4.0
   # heroku: circleci/heroku@1.2.6
-
+  
+workflows:
+  test-env-vars:
+    jobs:
+      - build
 jobs:
   build:
     working_directory: ~/psydiary_back_end # THIS SHOULD BE NAME OF YOUR APP
@@ -12,6 +16,7 @@ jobs:
           PGHOST: localhost
           PGUSER: psydiary_back_end # THIS SHOULD BE NAME OF YOUR APP
           RAILS_ENV: test
+          # ipgeo_api_key: ENV['ipgeo_api_key']
       - image: postgres:13.2
         environment:
           POSTGRES_USER: psydiary_back_end # THIS SHOULD BE NAME OF YOUR APP
