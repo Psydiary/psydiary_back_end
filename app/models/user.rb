@@ -15,10 +15,14 @@ class User < ApplicationRecord
   private
 
   def legal_ip_location
-    json = IPGeoLocationService.new.user_state(ip_address)
-    legal_states = ["Colorado", "California", "Oregon"]
-    return if legal_states.include?(json[:state_prov])
-
-    errors.add(:base, "Must be in a state where psyilocybin use is legal to create an account")
+    if ip_address.blank?
+      return
+    else
+      json = IPGeoLocationService.new.user_state(ip_address)
+      legal_states = ["Colorado", "California", "Oregon"]
+      return if legal_states.include?(json[:state_prov])
+  
+      errors.add(:base, "Must be in a state where psyilocybin use is legal to create an account")
+    end
   end
 end
