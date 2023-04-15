@@ -1,34 +1,53 @@
-class UserEntrySerializer < ActiveModel::Serializer
+class UserEntrySerializer
   include JSONAPI::Serializer
-  # attributes :user_id,
-  #            :mood_before,
-  #            :mood_after,
-  #            :environment,
-  #            :dosage,
-  #            :intensity,
-  #            :sociability,
-  #            :journal_prompt,
-  #            :journal_entry,
-  #            :other_notes,
-  #            :mood,
-  #            :depression_score,
-  #            :anxiety_score,
-  #            :sleep_score,
-  #            :energy_levels,
-  #            :exercise,
-  #            :meditation,
-  #            :notes
 
   attributes :id, :user_id, :created_at, :updated_at
 
-  attribute :mood_before, if: :dose_log?
+  attribute :mood_before, if: Proc.new { |record| 
+    record[:mood_before] }
 
-  def dose_log
-    require 'pry'; binding.pry
-    # object.is_a?(MicrodoseLogEntry)
-  end
+  attribute :mood_after, if: Proc.new { |record| 
+    record[:mood_after] }
 
-  attribute :created_at do |object|
-    object.created_at.strftime("%B %d, %Y")
-  end
+  attribute :dosage, if: Proc.new { |record| 
+    record[:dosage] }
+
+  attribute :intensity, if: Proc.new { |record| 
+    record[:intensity] }
+
+  attribute :sociability, if: Proc.new { |record| 
+    record[:sociability] }
+  
+  attribute :journal_prompt, if: Proc.new { |record| 
+    record[:journal_prompt] }
+    
+  attribute :journal_entry, if: Proc.new { |record| 
+  record[:journal_entry] }
+
+  attribute :environment, if: Proc.new { |record| 
+    record[:environment] }
+    
+  attribute :other_notes, if: Proc.new { |record| 
+    record[:other_notes]}
+  
+  attribute :mood, if: Proc.new { |record| 
+    record[:mood] }
+   
+  attribute :depression_score, if: Proc.new { |record| 
+    record[:depression_score] }
+    
+  attribute :anxiety_score, if: Proc.new { |record| 
+    record[:anxiety_score] }
+    
+  attribute :sleep_score, if: Proc.new { |record| 
+    record[:sleep_score] }
+  
+  attribute :exercise, if: Proc.new { |record| 
+    record[:exercise] }
+
+  attribute :meditation, if: Proc.new { |record| 
+    record[:meditation] }
+
+  attribute :notes, if: Proc.new { |record| 
+    record[:notes] }
 end
