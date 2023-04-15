@@ -12,10 +12,18 @@ class ErrorSerializer
   attribute :message do |object|
     err_message(object.class)
   end
-    
+
   attribute :errors do |object|
     errors = object.errors.map do |error|
       error.full_message
     end
+  end
+
+  def self.user_not_found
+    {errors: "Account not found"}
+  end
+
+  def self.incorrect_password
+    {errors: "Incorrect password"}
   end
 end
