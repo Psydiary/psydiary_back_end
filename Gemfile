@@ -35,7 +35,7 @@ gem "bootsnap", require: false
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem "rack-cors"
-
+gem 'active_model_serializers', '~> 0.10.0'
 gem "faraday" # https://github.com/lostisland/faraday
 gem "figaro" # https://github.com/laserlemon/figaro
 gem "jsonapi-serializer" # https://github.com/jsonapi-serializer/jsonapi-serializer#installation

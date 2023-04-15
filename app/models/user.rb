@@ -12,6 +12,10 @@ class User < ApplicationRecord
   
   enum role: %w(default manager admin)
 
+  def user_entries
+    # microdose_log_entries.or(daily_log_entries).order(created_at: :asc)
+    (microdose_log_entries + daily_log_entries).sort_by { |entry| entry.created_at }.reverse
+  end
   private
 
   def legal_ip_location
