@@ -10,7 +10,9 @@ Rails.application.routes.draw do
 
       post "/login", to: "users#login_user"
       
-      resources :users, only: [:show, :create]
+      resources :users, only: [:show, :create] do
+        resources :microdose_log_entrys, only: [:show], controller: "users/microdose_log_entrys"
+      end
     end
   end
 end
