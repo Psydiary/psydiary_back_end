@@ -14,7 +14,8 @@ class Api::V1::ProtocolsController < ApplicationController
       protocol.save
       render json: ProtocolSerializer.new(Protocol.find(protocol.id)), status: 201
     else
-      render json: ErrorSerializer.new(protocol.errors)
+      serialized_errors = ErrorSerializer.new(protocol).serializable_hash[:data][:attributes]
+      render json: serialized_errors, status: 400
     end
   end
 

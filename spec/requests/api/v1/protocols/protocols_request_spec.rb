@@ -131,25 +131,24 @@ RSpec.describe "Protocols API", type: :request do
           name: " ",
           days_between_dose: 4,
           dose_days: nil,
-          dosage: 50,
+          dosage: "thirty three milligrams",
           description: nil,
           protocol_duration: "two weeks",
-          break_duration: nil,
+          break_duration: 4,
           other_notes: "Vitae facere voluptatum pariatur quo."
         })
-
+        
         @headers = {"CONTENT_TYPE" => "application/json"}
       end
 
       it "returns an error message for missing attributes and/or invalid data types" do
-
         post "/api/v1/protocols", headers: @headers, params: @protocol_params, as: :json
         parsed = JSON.parse(response.body, symbolize_names: true)
-        require 'pry'; binding.pry
+        
         
         expect(response).to have_http_status(400)
         expect(parsed[:message]).to eq("Protocol was not created. Please enter valid attributes")
-        expect(parsed[:errors]).to eq("Name can't be blank, Description can't be blank, Unit price is not a number, Merchant can't be blank, Merchant must exist")
+        expect(parsed[:errors]).to eq(["Name can't be blank", "Description can't be blank", "Protocol duration is not a number", "Dosage is not a number"])
       end
     end
   end

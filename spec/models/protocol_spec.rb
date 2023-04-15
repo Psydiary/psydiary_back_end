@@ -11,6 +11,7 @@ describe Protocol do
     it { should validate_numericality_of :dosage }
     it { should validate_numericality_of :days_between_dose }
     it { should validate_presence_of :protocol_duration }
+    it { should validate_numericality_of :protocol_duration }
     it { should validate_presence_of :break_duration }
     it { should validate_presence_of :description }
 
@@ -19,7 +20,7 @@ describe Protocol do
 
       it "returns an error if both days_between_dose and dose_days are present" do
         expect(protocol).to be_invalid
-        expect(protocol.errors.full_messages).to eq(["Specify number of days between dose or days of the week you would like to dose, not both"])
+        expect(protocol.errors.full_messages).to eq(["Protocol duration is not a number", "Specify number of days between dose or days of the week you would like to dose, not both"])
       end
 
       it "returns an error if neither days_between_dose and dose_days are present" do
@@ -27,7 +28,7 @@ describe Protocol do
         protocol.dose_days = nil
 
         expect(protocol).to be_invalid
-        expect(protocol.errors.full_messages).to eq(["Specify number of days between dose or days of the week you would like to dose, not both"])
+        expect(protocol.errors.full_messages).to eq(["Protocol duration is not a number", "Specify number of days between dose or days of the week you would like to dose, not both"])
       end
     end
   end
