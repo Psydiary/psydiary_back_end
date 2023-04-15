@@ -2,6 +2,7 @@ module ErrorSerializerHelper
   def err_message(classname)
     return "User could not be created" if classname == User
     return "Protocol was not created. Please enter valid attributes" if classname == Protocol
+    return "Microdose log entry was not created. Please enter valid attributes" if classname == MicrodoseLogEntry
   end
 end
 
