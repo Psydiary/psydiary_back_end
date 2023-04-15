@@ -9,9 +9,12 @@ Rails.application.routes.draw do
 
       post "/login", to: "users#login_user"
       
-      resources :protocols, only: %i[index show create]
+      resources :users, only: [:show, :create, :update] do
+        resources :microdose_log_entrys, only: [:show], controller: "users/microdose_log_entrys"
+      end
       
-      resources :users, only: [:show, :create, :update]
+      resources :protocols, only: %i[index show create]
+
     end
   end
 end
