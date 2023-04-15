@@ -8,7 +8,7 @@ RSpec.describe "Microdose Log API", type: :request do
 
     context "when successful" do
       it "returns a user's microdose log entry" do
-        get "/api/v1/users/#{user_1.id}/microdose_log_entrys/#{microdose_log_1.id}"
+        get "/api/v1/users/#{user_1.id}/microdose_log_entries/#{microdose_log_1.id}"
 
         expect(response).to be_successful
 
@@ -34,7 +34,7 @@ RSpec.describe "Microdose Log API", type: :request do
 
     context "when unsuccessful" do
       it "returns a 404 error if the microdose log entry does not exist" do
-        get "/api/v1/users/#{user_1.id}/microdose_log_entrys/9999999999"
+        get "/api/v1/users/#{user_1.id}/microdose_log_entries/9999999999"
 
         expect(response).to_not be_successful
         expect(response.status).to eq(404)
@@ -43,6 +43,32 @@ RSpec.describe "Microdose Log API", type: :request do
 
         expect(microdose_json[:errors]).to eq("Couldn't find MicrodoseLogEntry with 'id'=9999999999")
       end
+    end
+  end
+
+  describe "#index" do
+    before :each do
+      @p1 = Protocol.create!(name: "Test Protocol", description: "This is a test protocol", dosage: 1.5, dose_days: "Monday, Wednesday, Friday", protocol_duration: 4, break_duration: 1, other_notes: "Taken in the evening")
+      @u1 = User.create!(name: "Tori Enyart", email: "torienyart@gmail.com", password: "1234", protocol_id: @p1.id, ip_address: "73.153.161.252")
+      @u2 =User.create!(name: "Bobby Luly", email: "bobbyluly@gmail.com", password: "5678", protocol_id: @p1.id, ip_address: "73.153.161.252")
+      @mde1 = create(:microdose_log_entry, user_id: @u1.id)
+      @mde2 = create(:microdose_log_entry, user_id: @u1.id)
+      @mde3 = create(:microdose_log_entry, user_id: @u1.id)
+      @mde4 = create(:microdose_log_entry, user_id: @u1.id)
+      @mde5 = create(:microdose_log_entry, user_id: @u1.id)
+
+      @mde6 = create(:microdose_log_entry, user_id: @u2.id)
+      @mde7 = create(:microdose_log_entry, user_id: @u2.id)
+    end
+    
+    it "can respond w/ all the microdose log entries from a single user" do
+      get "/users/#{@u1.id}/microdose_log_entries"
+      json = JSON.parse(response.body, symbolize_names: true)
+
+      expect(response).to be successful
+      expect(response.status).to eq(200)
+      expect(microdose_json[:data].count).to eq(5)
+      expect(microdose_json[:data].first.keys).to include('mood_before')
     end
   end
 end

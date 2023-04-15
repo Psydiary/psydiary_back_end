@@ -1,4 +1,4 @@
-class Api::V1::Users::MicrodoseLogEntrysController < ApplicationController
+class Api::V1::Users::MicrodoseLogEntriesController < ApplicationController
   def show
     render json: MicrodoseLogEntrySerializer.new(MicrodoseLogEntry.find(params[:id]))
   end
