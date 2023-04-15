@@ -5,7 +5,7 @@ class Protocol < ApplicationRecord
                         :break_duration,
                         :description
   validates_numericality_of :days_between_dose, allow_nil: true
-  validates_numericality_of :dosage
+  validates_numericality_of :protocol_duration, :dosage
   validate :daysbetween_xor_dosedays
   
   has_many :users

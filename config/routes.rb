@@ -6,13 +6,15 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :protocols, only: [:index, :show]
 
       post "/login", to: "users#login_user"
       
-      resources :users, only: [:show, :create] do
+      resources :users, only: [:show, :create, :update] do
         resources :microdose_log_entrys, only: [:show], controller: "users/microdose_log_entrys"
       end
+      
+      resources :protocols, only: %i[index show create]
+
     end
   end
 end

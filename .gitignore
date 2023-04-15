@@ -30,6 +30,7 @@
 
 # Ignore application configuration
 /config/application.yml
+/coverage
 
 /docker-compose.yml
 /Dockerfile
