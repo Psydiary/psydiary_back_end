@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       
       resources :users, only: [:show, :create, :update] do
         resources :microdose_log_entrys, only: [:show], controller: "users/microdose_log_entrys"
+        resources :daily_log_entries, only: %i[show], controller: "users/daily_log_entries"
       end
       
       resources :protocols, only: %i[index show create]
