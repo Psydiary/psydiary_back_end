@@ -33,7 +33,7 @@ describe 'Users API', type: :request do
       json = JSON.parse(response.body, symbolize_names: true)
 
       expect(response.status).to eq(422)
-      expect(json[:errors]).to eq(["Protocol must exist", "Email can't be blank", "Ip address can't be blank"])
+      expect(json[:errors]).to eq(["Email can't be blank", "Ip address can't be blank"])
     end
 
     it "can return an error response when the user is not in a legal state" do
