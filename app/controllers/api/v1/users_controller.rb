@@ -22,9 +22,18 @@ class Api::V1::UsersController < ApplicationController
     end
   end
 
-
   def show
     render json: UserSerializer.new(User.find(params[:id]))
+  end
+
+  def update
+    user = User.find(params[:id])
+    if user.update(user_params)
+      serialized_user = render json: UserSerializer.new(user)
+    else
+      serialized_errors = ErrorSerializer.new(user).serializable_hash[:data][:attributes]
+      render json: serialized_errors, status: :unprocessable_entity
+    end
   end
 
   private

@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
       post "/login", to: "users#login_user"
       
-      resources :users, only: [:show, :create]
+      resources :users, only: [:show, :create, :update]
     end
   end
 end
