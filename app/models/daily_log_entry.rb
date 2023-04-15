@@ -1,6 +1,5 @@
 class DailyLogEntry < ApplicationRecord
   belongs_to :user
 
-  enum exercise: %w(arobic, strength, cardio, yoga, sport)
-
+  enum exercise: %w(aerobic strength cardio yoga sport)
 end

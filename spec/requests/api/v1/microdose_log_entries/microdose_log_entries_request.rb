@@ -59,16 +59,19 @@ RSpec.describe "Microdose Log API", type: :request do
 
       @mde6 = create(:microdose_log_entry, user_id: @u2.id)
       @mde7 = create(:microdose_log_entry, user_id: @u2.id)
+
+      @dle1 = create(:daily_log_entry, user_id: @u1.id)
+      @dle2 = create(:daily_log_entry, user_id: @u1.id)
     end
     
     it "can respond w/ all the microdose log entries from a single user" do
-      get "/users/#{@u1.id}/microdose_log_entries"
+      get "/api/v1/users/#{@u1.id}/microdose_log_entries"
       json = JSON.parse(response.body, symbolize_names: true)
 
-      expect(response).to be successful
+      expect(response).to be_successful
       expect(response.status).to eq(200)
-      expect(microdose_json[:data].count).to eq(5)
-      expect(microdose_json[:data].first.keys).to include('mood_before')
+      expect(json[:data].count).to eq(5)
+      expect(json[:data].first[:attributes].keys).to include(:user_id, :mood_before, :mood_after, :environment, :dosage, :intensity, :sociability, :journal_prompt, :journal_entry, :other_notes, :created_at)
     end
   end
 end

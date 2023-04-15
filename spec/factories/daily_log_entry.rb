@@ -5,9 +5,9 @@ FactoryBot.define do
     anxiety_score { Faker::Number.between(from: 1, to: 10) }
     sleep_score { Faker::Number.between(from: 1, to: 10) }
     energy_levels { Faker::Number.between(from: 1, to: 10) }
-    exercise { Faker::Number.between(from:1, to: 5) }
+    exercise { ['aerobic', 'strength', 'cardio', 'yoga', 'sport'].sample }
     meditation { Faker::Number.between(from:1, to: 60) }
-    sociability { Faker::Number.between(from:1, to: 3) }
+    sociability { ['social', 'anxious', 'withdrawn'].sample }
     notes { Faker::Hipster.paragraph }
   end
 end
