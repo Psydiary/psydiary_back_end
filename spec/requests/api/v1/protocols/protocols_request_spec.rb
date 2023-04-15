@@ -62,4 +62,94 @@ RSpec.describe "Protocols API", type: :request do
       end
     end
   end
+
+  describe "#create" do
+    context "upon receiving a valid request" do
+      before do
+        3.times do
+          create(:protocol)
+        end
+
+        @protocol_params = ({
+          id: 60,
+          name: "Noe Pagac",
+          days_between_dose: 4,
+          dose_days: nil,
+          dosage: 0.33,
+          description: "treats allergy symptoms",
+          protocol_duration: 2,
+          break_duration: 4,
+          other_notes: "Vitae facere voluptatum pariatur quo."
+        })
+        
+        @headers = {"CONTENT_TYPE" => "application/json"}
+      end
+
+      it "can successfully creates a new protocol" do
+        expect(Protocol.count).to eq(3)
+
+        post "/api/v1/protocols", headers: @headers, params: @protocol_params, as: :json
+
+        expect(response.status).to eq(201)
+        expect(Protocol.count).to eq(4)
+
+        parsed = JSON.parse(response.body, symbolize_names: true)
+
+        data = parsed[:data]
+        attributes = data[:attributes]
+
+        expect(data.keys).to eq([:id, :type, :attributes])
+        expect(attributes.keys).to eq([
+          :name, 
+          :days_between_dose, 
+          :dose_days, 
+          :dosage,
+          :description,
+          :protocol_duration,
+          :break_duration,
+          :other_notes
+        ])
+
+        expect(data[:id]).to be_a String
+        expect(data[:type]).to be_a String
+        expect(data[:attributes]).to be_a Hash
+        expect(attributes[:name]).to be_a String
+        expect(attributes[:days_between_dose]).to be_an(Integer).or be_nil
+        expect(attributes[:dose_days]).to be_a(String).or be_nil
+        expect(attributes[:dosage]).to be_a(Float)
+        expect(attributes[:description]).to be_a(String)
+        expect(attributes[:protocol_duration]).to be_an(Integer)
+        expect(attributes[:break_duration]).to be_an(Integer)
+        expect(attributes[:other_notes]).to be_a(String).or be_nil
+      end
+    end
+
+    context "upon recieving an invalid request" do 
+      before do
+        @protocol_params = ({
+          id: 60,
+          name: " ",
+          days_between_dose: 4,
+          dose_days: nil,
+          dosage: "thirty three milligrams",
+          description: nil,
+          protocol_duration: "two weeks",
+          break_duration: 4,
+          other_notes: "Vitae facere voluptatum pariatur quo."
+        })
+        
+        @headers = {"CONTENT_TYPE" => "application/json"}
+      end
+
+      it "returns an error message for missing attributes and/or invalid data types" do
+        post "/api/v1/protocols", headers: @headers, params: @protocol_params, as: :json
+        parsed = JSON.parse(response.body, symbolize_names: true)
+        
+        
+        expect(response).to have_http_status(400)
+        expect(parsed[:message]).to eq("Protocol was not created. Please enter valid attributes")
+        expect(parsed[:errors]).to eq(["Name can't be blank", "Description can't be blank", "Protocol duration is not a number", "Dosage is not a number"])
+      end
+    end
+  end
 end
