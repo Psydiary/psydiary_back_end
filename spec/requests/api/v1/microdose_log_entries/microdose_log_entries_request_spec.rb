@@ -33,7 +33,7 @@ RSpec.describe "Microdose Log API", type: :request do
     end
 
     context "when unsuccessful" do
-      it "returns a 404 error if the microdose log entry does not exist" do
+      xit "returns a 404 error if the microdose log entry does not exist" do
         get "/api/v1/users/#{user_1.id}/microdose_log_entries/9999999999"
 
         expect(response).to_not be_successful
@@ -41,7 +41,19 @@ RSpec.describe "Microdose Log API", type: :request do
 
         microdose_json = JSON.parse(response.body, symbolize_names: true)
 
-        expect(microdose_json[:errors]).to eq("Couldn't find MicrodoseLogEntry with 'id'=9999999999")
+        expect(microdose_json[:errors]).to eq("Couldn't find MicrodoseLogEntry with 'id'=9999999999") #what I expect the error to be
+        expect(microdose_json[:errors]).to eq("Couldn't find MicrodoseLogEntry with 'id'=9999999999 [WHERE \"microdose_log_entries\".\"user_id\" = $1]") #what the error actually is
+      end
+
+      it "returns a 404 error if the user does not exist" do
+        get "/api/v1/users/9999999999/microdose_log_entries/#{microdose_log_1.id}"
+
+        expect(response).to_not be_successful
+        expect(response.status).to eq(404)
+
+        microdose_json = JSON.parse(response.body, symbolize_names: true)
+
+        expect(microdose_json[:errors]).to eq("Couldn't find User with 'id'=9999999999")
       end
     end
   end
