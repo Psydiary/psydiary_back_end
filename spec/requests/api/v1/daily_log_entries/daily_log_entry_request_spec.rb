@@ -70,4 +70,33 @@ RSpec.describe "DailyLogEntry API", type: :request do
       end
     end
   end
+
+  describe "#create" do
+    before :each do
+      @p1 = create(:protocol)
+      @u1 = create(:user, protocol_id: @p1.id, ip_address: "73.153.161.252")
+      @u2 = create(:user, protocol_id: @p1.id, ip_address: "73.153.161.252")
+      @dle1 = create(:daily_log_entry, user_id: @u1.id)
+      @dle2 = create(:daily_log_entry, user_id: @u1.id)
+      @dle3 = attributes_for(:daily_log_entry, user_id: @u1.id)
+      @dle4 = attributes_for(:daily_log_entry)
+    end
+
+    context "when successful" do
+      it "creates a new microdose log entry" do
+        post "/api/v1/users/#{@u1.id}/daily_log_entries", params: @dle3
+        json = JSON.parse(response.body, symbolize_names: true)
+
+        expect(DailyLogEntry.count).to eq(3)
+        expect(response).to be_successful
+        expect(response.status).to eq(201)
+
+
+        expect(json[:data][:type]).to eq("daily_log_entry")
+        expect(json[:data][:attributes].keys).to eq([:user_id, :mood, :depression_score, :anxiety_score, :sleep_score, :energy_levels, :notes, :meditation, :sociability, :exercise])
+        expect(json[:data][:attributes][:user_id]).to eq(@u1.id)
+        expect(json[:data][:attributes][:journal_entry]).to eq(@dle3[:journal_entry])
+      end
+    end
+  end
 end
