@@ -50,6 +50,7 @@ group :development, :test do
   gem "rspec-rails"
   gem "vcr" # https://github.com/vcr/vcr
   gem "webmock" # https://github.com/bblimke/webmock
+  gem "simplecov"
 end
 
 group :development do
