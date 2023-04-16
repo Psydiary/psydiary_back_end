@@ -1,6 +1,9 @@
 class Api::V1::Users::MicrodoseLogEntriesController < ApplicationController
   def show
-    render json: MicrodoseLogEntrySerializer.new(MicrodoseLogEntry.find(params[:id]))
+    user = User.find(params[:user_id])
+    entries = user.microdose_log_entries
+
+    render json: MicrodoseLogEntrySerializer.new(entries.find(params[:id]))
   end
 
   def create
