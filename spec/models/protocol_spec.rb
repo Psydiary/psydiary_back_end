@@ -62,5 +62,23 @@ describe Protocol do
         expect(Protocol.custom_protocols).to eq([custom_1, custom_2])
       end
     end
+
+    describe '.protocols_by_user' do
+      before :each do
+        @u1 = create(:user, ip_address: "2601:282:4300:aef0:3c11:257d:152b:f5ad")
+        @u2 = create(:user, ip_address: "2601:282:4300:aef0:3c11:257d:152b:f5ad")
+        Protocol.destroy_all
+        @p1 = Protocol.create(name: "Fadiman", description: "This is a test protocol", days_between_dose: 3, dosage: 0.2, protocol_duration: 4, break_duration: 3, other_notes: "Taken in the morning")
+        @p2 = Protocol.create!(name: "Stamets", description: "This is the other protocol", dose_days:"Thursday, Friday, Saturday, Sunday", dosage: 0.1, protocol_duration: 4, break_duration: 4, other_notes: "Take with 500mg of Lion's Mane extract powder and 100mg of Niacin Vit B3")
+        @p3 = Protocol.create!(name: "Nightcap", description: "Yet another protocol", days_between_dose: 3, dosage: 0.2, protocol_duration: 4, break_duration: 3, other_notes: "Taken in the evening")
+        @p4 = create(:protocol, created_by: @u1.id)
+        @p5 = create(:protocol, created_by: @u2.id)
+      end
+
+      it 'returns protocols a user created and the defaults' do
+        expect(Protocol.protocols_by_user(@u1.id)).to include(@p1, @p2, @p3, @p4)
+        expect(Protocol.protocols_by_user(@u1.id)).to_not include(@p5)
+      end
+    end
   end
 end
