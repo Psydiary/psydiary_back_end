@@ -43,7 +43,7 @@ RSpec.describe "DailyLogEntry API", type: :request do
         expect(attributes[:sleep_score]).to be_an Integer
         expect(attributes[:energy_levels]).to be_an Integer
         expect(attributes[:notes]).to be_a String
-        expect(attributes[:meditation]).to be_an Integer
+        expect(attributes[:meditation]).to be_a String
         expect(attributes[:sociability]).to be_a String
       end
 

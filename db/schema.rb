@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_15_170316) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_17_004837) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -21,7 +21,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_15_170316) do
     t.integer "sleep_score"
     t.integer "energy_levels"
     t.integer "exercise"
-    t.integer "meditation"
+    t.string "meditation"
     t.integer "sociability"
     t.string "notes"
     t.bigint "user_id"
