@@ -3,6 +3,10 @@ class UserEntrySerializer
 
   attributes :id, :user_id, :created_at, :updated_at
 
+  attribute :type do |object|
+    object.class.name
+  end
+
   attribute :mood_before, if: Proc.new { |record| 
     record[:mood_before] }
 
