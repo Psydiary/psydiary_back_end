@@ -52,6 +52,9 @@ class UserEntrySerializer
   attribute :meditation, if: Proc.new { |record| 
     record[:meditation] }
 
+  attribute :energy_levels, if: Proc.new { |record| 
+    record[:energy_levels] }
+
   attribute :notes, if: Proc.new { |record| 
     record[:notes] }
 end
