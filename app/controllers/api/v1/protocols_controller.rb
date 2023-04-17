@@ -1,6 +1,6 @@
 class Api::V1::ProtocolsController < ApplicationController
   def index
-    render json: ProtocolSerializer.new(Protocol.all)
+    render json: ProtocolSerializer.new(Protocol.protocols_by_user(params[:user_id]))
   end
 
   def show

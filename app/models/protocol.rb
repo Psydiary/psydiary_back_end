@@ -20,6 +20,10 @@ class Protocol < ApplicationRecord
     where(status: 1)
   end
 
+  def self.protocols_by_user(user_id)
+    where("created_by  = #{user_id}").or(where"created_by  = 0")
+  end
+
   private
 
   def daysbetween_xor_dosedays
