@@ -31,7 +31,8 @@ class Api::V1::ProtocolsController < ApplicationController
       :description, 
       :protocol_duration, 
       :break_duration, 
-      :other_notes
+      :other_notes,
+      :created_by
     )
   end
 end
