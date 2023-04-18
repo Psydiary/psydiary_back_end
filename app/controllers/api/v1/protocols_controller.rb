@@ -9,7 +9,7 @@ class Api::V1::ProtocolsController < ApplicationController
 
   def create
     protocol = Protocol.new(protocol_params)
-
+    
     if protocol.valid?
       protocol.save
       render json: ProtocolSerializer.new(Protocol.find(protocol.id)), status: 201
@@ -22,7 +22,7 @@ class Api::V1::ProtocolsController < ApplicationController
   private
 
   def protocol_params
-    params.require(:protocol).permit(
+    params.permit(
       :id, 
       :name, 
       :days_between_dose,
