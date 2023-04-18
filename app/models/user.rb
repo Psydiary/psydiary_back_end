@@ -16,6 +16,14 @@ class User < ApplicationRecord
     # microdose_log_entries.or(daily_log_entries).order(created_at: :asc)
     (microdose_log_entries + daily_log_entries).sort_by { |entry| entry.created_at }.reverse
   end
+
+  def self.from_omniauth(response)
+    User.find_or_create_by(uid: response[:uid], provider: response[:provider]) do |u|
+      u.email = response[:info][:email]
+      u.password = SecureRandom.hex(15)
+    end
+  end
+
   private
 
   def legal_ip_location

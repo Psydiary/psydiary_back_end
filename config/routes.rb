@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     namespace :v1 do
 
       post "/login", to: "users#login_user"
+      post "/omniauth", to: "users#omniauth"
       
       resources :users, only: [:show, :create, :update] do
         resources :microdose_log_entries, only: %i[show index create], controller: "users/microdose_log_entries"

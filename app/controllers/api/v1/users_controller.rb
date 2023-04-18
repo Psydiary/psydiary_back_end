@@ -36,6 +36,16 @@ class Api::V1::UsersController < ApplicationController
     end
   end
 
+  def omniauth
+    user = User.from_omniauth(params)
+    if user.valid?
+      serialized_user = render json: UserSerializer.new(user)
+    else
+      serialized_errors = ErrorSerializer.new(user).serializable_hash[:data][:attributes]
+      render json: serialized_errors, status: :unprocessable_entity
+    end
+  end
+
   private
 
     def user_params
