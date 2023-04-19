@@ -26,6 +26,17 @@ class Api::V1::UsersController < ApplicationController
     render json: UserSerializer.new(User.find(params[:id]))
   end
 
+  def edit
+    user = User.find(user_params[:user_id])
+
+    if user.persisted? && !user.protocol.nil?
+      render json: UserEditSerializer.new(UserProtocol.new(user, user.protocol))
+    else
+      serialized_errors = ErrorSerializer.user_not_found
+      render json: serialized_errors, status: 404
+    end
+  end
+
   def update
     user = User.find(params[:id])
     if user.update(user_params)
@@ -49,6 +60,6 @@ class Api::V1::UsersController < ApplicationController
   private
 
     def user_params
-      params.permit(:name, :email, :password, :protocol_id, :data_sharing, :ip_address)
+      params.permit(:name, :user_id, :email, :password, :protocol_id, :data_sharing, :ip_address)
     end
 end
