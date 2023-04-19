@@ -37,18 +37,12 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def omniauth
-    user = User.where(email: params[:info][:email])
-    if !user.empty? && user.first.uid?
-      serialized_errors = ErrorSerializer.wrong_login_type
-      render json: serialized_errors, status: :unprocessable_entity
+    user = User.from_omniauth(params)
+    if user.valid? || user.persisted?
+      serialized_user = render json: UserSerializer.new(user)
     else
-      user = User.from_omniauth(params)
-      if user.valid? || user.persisted?
-        serialized_user = render json: UserSerializer.new(user)
-      else
-        serialized_errors = ErrorSerializer.new(user).serializable_hash[:data][:attributes]
-        render json: serialized_errors, status: :unprocessable_entity
-      end
+      serialized_errors = ErrorSerializer.new(user).serializable_hash[:data][:attributes]
+      render json: serialized_errors, status: :unprocessable_entity
     end
   end
 
