@@ -38,7 +38,7 @@ class Api::V1::UsersController < ApplicationController
 
   def omniauth
     user = User.where(email: params[:info][:email])
-    if user.first.uid.nil? || user.nil?
+    if user && user.first.uid.nil?
       serialized_errors = ErrorSerializer.wrong_login_type
       render json: serialized_errors, status: :unprocessable_entity
     else
