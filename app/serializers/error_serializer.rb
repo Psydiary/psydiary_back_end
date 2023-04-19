@@ -27,4 +27,8 @@ class ErrorSerializer
   def self.incorrect_password
     {errors: "Incorrect password"}
   end
+
+  def self.wrong_login_type
+    {errors: "It seems like you don't usually use a social account.... try again another way"}
+  end
 end

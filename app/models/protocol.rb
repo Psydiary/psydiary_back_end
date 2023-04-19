@@ -13,7 +13,7 @@ class Protocol < ApplicationRecord
   enum status: %w(default custom)
 
   def self.default_protocols
-    where(status: 0)
+    where(created_by: 0)
   end
 
   def self.custom_protocols
@@ -21,7 +21,11 @@ class Protocol < ApplicationRecord
   end
 
   def self.protocols_by_user(user_id)
-    where("created_by  = #{user_id}").or(where"created_by  = 0")
+    if user_id.nil?
+      self.default_protocols
+    else
+      where("created_by  = #{user_id}").or(where"created_by  = 0")
+    end
   end
 
   private
