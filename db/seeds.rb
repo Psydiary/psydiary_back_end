@@ -14,8 +14,8 @@ stamets_protocol = Protocol.create!(name: "Stamets", description: stamets_descri
 nightcap_protocol = Protocol.create!(name: "Nightcap", description: nightcap_description, days_between_dose: 3, dosage: 0.2, protocol_duration: 4, break_duration: 3, other_notes: "Taken in the evening")
 
 user_tori = User.create!(name: "Tori Enyart", email: "torienyart@gmail.com", password: "1234", protocol_id: fadiman_protocol.id, ip_address: "73.153.161.252", data_sharing: true)
-
 user_bobby = User.create!(name: "Bobby Luly", email: "bobbyluly@gmail.com", password: "5678", protocol_id: stamets_protocol.id, ip_address: "73.153.161.252", data_sharing: true)
+user_empty = User.create!(name: "Empty", email: "empty@gmail.com", password:'empty', , protocol_id: stamets_protocol.id, ip_address: "73.153.161.252", data_sharing: true)
 microdose_log_1_bobby =  MicrodoseLogEntry.create!(user_id: user_bobby.id, mood_before: "Melancholy", mood_after: "Happy", environment: "The Park", dosage: 0.75, intensity: 0, sociability: 1, journal_prompt: "How was your day?", journal_entry: "I felt great after today's microdose!", other_notes: "What a nice little reset this was")
 microdose_log_2_bobby =  MicrodoseLogEntry.create!(user_id: user_bobby.id, mood_before: "Happy", mood_after: "Introspective", environment: "Hike in the foothills", dosage: 1.5, intensity: 1, sociability: 2, journal_prompt: "What did you learn about yourself?", journal_entry: "I've realized some things I'd like to change in my life.", other_notes: "I've still got some processing to do")
 daily_log_1_bobby = DailyLogEntry.create!(user_id: user_bobby.id, mood: "Happy", depression_score: 1, anxiety_score: 2, sleep_score: 7, energy_levels: 6, exercise: 2, meditation: 30, sociability: 0, notes: "I'm feeling great today!")
