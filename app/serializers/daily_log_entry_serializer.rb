@@ -10,4 +10,8 @@ class DailyLogEntrySerializer
               :meditation,
               :sociability,
               :exercise
+
+  attribute :created_at do |object|
+    object.created_at.strftime("%B %d, %Y")
+  end
 end
