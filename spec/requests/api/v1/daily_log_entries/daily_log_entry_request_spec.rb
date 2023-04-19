@@ -33,7 +33,8 @@ RSpec.describe "DailyLogEntry API", type: :request do
           :notes,
           :meditation,
           :sociability,
-          :exercise
+          :exercise,
+          :created_at
         ])
         
         expect(attributes[:user_id]).to be_an Integer
@@ -93,7 +94,7 @@ RSpec.describe "DailyLogEntry API", type: :request do
 
 
         expect(json[:data][:type]).to eq("daily_log_entry")
-        expect(json[:data][:attributes].keys).to eq([:user_id, :mood, :depression_score, :anxiety_score, :sleep_score, :energy_levels, :notes, :meditation, :sociability, :exercise])
+        expect(json[:data][:attributes].keys).to eq([:user_id, :mood, :depression_score, :anxiety_score, :sleep_score, :energy_levels, :notes, :meditation, :sociability, :exercise, :created_at])
         expect(json[:data][:attributes][:user_id]).to eq(@u1.id)
         expect(json[:data][:attributes][:journal_entry]).to eq(@dle3[:journal_entry])
       end
