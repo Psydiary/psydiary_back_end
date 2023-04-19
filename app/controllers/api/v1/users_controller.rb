@@ -37,13 +37,18 @@ class Api::V1::UsersController < ApplicationController
     end
   end
 
-  def update
-    user = User.find(params[:id])
-    if user.update(user_params)
-      serialized_user = render json: UserSerializer.new(user)
-    else
-      serialized_errors = ErrorSerializer.new(user).serializable_hash[:data][:attributes]
-      render json: serialized_errors, status: :unprocessable_entity
+  def update_settings
+    @user = User.find(update_params[:user_id])
+    if update_params[:new_password].present? && update_params[:new_password] == update_params[:password_conf]
+      if BCrypt::Password.new(@user.password_digest) == update_params[:old_password]
+        @user.update(update_params.except(:old_password, :new_password, :password_conf, :user_id))
+        @user.password = update_params[:new_password]
+        
+        redirect_to api_v1_user_settings_path(@user.id), notice: 'Update Successful'
+      else
+        serialized_errors = ErrorSerializer.new(@user).serializable_hash[:data][:attributes]
+        render json: serialized_errors, status: :unprocessable_entity
+      end
     end
   end
 
@@ -60,6 +65,28 @@ class Api::V1::UsersController < ApplicationController
   private
 
     def user_params
-      params.permit(:name, :user_id, :email, :password, :protocol_id, :data_sharing, :ip_address)
+      params.permit(
+        :name, 
+        :user_id, 
+        :email, 
+        :password, 
+        :protocol_id, 
+        :data_sharing, 
+        :ip_address
+      )
+    end
+
+    def update_params
+      params
+      .require(:data)
+      .require(:attributes)
+      .permit(
+        :email,
+        :old_password,
+        :new_password,
+        :password_conf,
+        :data_sharing,
+      )
+      .merge(user_id: params[:user_id])
     end
 end
