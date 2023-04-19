@@ -38,8 +38,8 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def update_protocol
-    user = User.find(params[:id])
-    if user.update(user_params)
+    user = User.find(params[:user_id])
+    if user.update(protocol_id: params[:protocol_id])
       serialized_user = render json: UserSerializer.new(user)
     else
       serialized_errors = ErrorSerializer.new(user).serializable_hash[:data][:attributes]

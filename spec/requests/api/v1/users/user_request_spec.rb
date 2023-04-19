@@ -183,28 +183,20 @@ describe 'Users API', type: :request do
   context '#update_protocol' do
     before :each do
       @p1 = Protocol.create!(name: "Stamets", description: "words", dose_days:"Thursday, Friday, Saturday, Sunday", dosage: 0.1, protocol_duration: 4, break_duration: 4, other_notes: "Take with 500mg of Lion's Mane extract powder and 100mg of Niacin Vit B3")
+      @p2 = Protocol.create!(name: "Nightcap", description: "take at night", days_between_dose: 3, dosage: 0.2, protocol_duration: 4, break_duration: 3, other_notes: "Taken in the evening")
       @u1 = User.create!(name: "Existing User", email: "existing_user@gmail.com", password: "1234", protocol_id: @p1.id, ip_address: "73.153.161.252")
       @u4 = User.create!(name: "Existing User 2", email: "existing_user_2@gmail.com", password: "1234", protocol_id: @p1.id, ip_address: "73.153.161.252")
       @u2 = attributes_for(:user)
-      @u3 = attributes_for(:user, protocol_id: "existing_user@gmail.com")
+      @u3 = attributes_for(:user, protocol_id: @p2.id)
     end
 
     it "PATCH users/:user_id/users" do
-      patch "/api/v1/users/#{@u1.id}/users", params: @u3
+      patch "/api/v1/users/#{@u1.id}/update_protocol", params: @u3
       json = JSON.parse(response.body, symbolize_names: true)
-
+      
       expect(response.status).to eq(200)
       expect(json[:data][:attributes].keys).to include(:name, :email, :protocol_id, :data_sharing)
-      expect(json[:data][:attributes][:name]).to include(@u2[:name])
-      expect(json[:data][:attributes][:description]).to eq(@u2[:description])
-      expect(json[:data][:attributes][:unit_price]).to eq(@u2[:unit_price])
+      expect(json[:data][:attributes][:protocol_id]).to eq(@p2[:protocol_id])
     end
-
-    it "can return an error response when the email was already taken" do
-      put "/api/v1/users/#{@u4.id}", params: @u3
-      json = JSON.parse(response.body, symbolize_names: true)
-
-      expect(response.status).to eq(422)
-      expect(json[:errors]).to eq(["Email has already been taken"])
-    end
+  end
 end
