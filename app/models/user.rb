@@ -26,6 +26,7 @@ class User < ApplicationRecord
       u.data_sharing = false
       u.ip_address = response[:ip_address]
       u.protocol_id = 1
+      require 'pry'; binding.pry
     end
   end
 
