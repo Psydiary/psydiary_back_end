@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       post "/omniauth", to: "users#omniauth"
       
       resources :users, only: [:show, :create, :update] do
+        get 'settings', to: 'users#edit'
         resources :microdose_log_entries, only: %i[show index create], controller: "users/microdose_log_entries"
         resources :daily_log_entries, only: %i[show create], controller: "users/daily_log_entries"
         resources :log_entries, only: [:index], controller: "users/log_entries"

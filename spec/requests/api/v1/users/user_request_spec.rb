@@ -111,6 +111,35 @@ describe 'Users API', type: :request do
     end
   end
 
+  context "#edit" do
+    before do
+      protocol = create(:protocol)
+      @user = create(:user, protocol_id: protocol.id, ip_address: "73.153.161.252")
+    end
+    
+    it 'GET /api/v1/users/:id/settings' do
+      get "/api/v1/users/#{@user.id}/settings"
+
+      expect(response.status).to eq(200)
+
+      json = JSON.parse(response.body, symbolize_names: true)
+      
+      data = json[:data]
+      attributes = json[:data][:attributes]
+
+      expect(data.keys).to eq([:id, :type, :attributes]) 
+      expect(data[:id]).to be_an Integer 
+      expect(data[:type]).to be_a String 
+      expect(data[:attributes]).to be_a Hash 
+      
+      expect(attributes.keys).to eq([:name, :email, :protocol, :data_sharing]) 
+      expect(attributes[:name]).to be_a String
+      expect(attributes[:email]).to be_a String
+      expect(attributes[:protocol]).to be_a Hash
+      expect(attributes[:data_sharing]).to be_a(TrueClass).or be_a(FalseClass) 
+    end
+  end
+
   context '#update' do
     before :each do
       @p1 = Protocol.create!(name: "Stamets", description: "words", dose_days:"Thursday, Friday, Saturday, Sunday", dosage: 0.1, protocol_duration: 4, break_duration: 4, other_notes: "Take with 500mg of Lion's Mane extract powder and 100mg of Niacin Vit B3")
