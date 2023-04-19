@@ -16,6 +16,7 @@ Rails.application.routes.draw do
         resources :daily_log_entries, only: %i[show create], controller: "users/daily_log_entries"
         resources :log_entries, only: [:index], controller: "users/log_entries"
         resources :protocols, only: %i[index show create]
+        patch "/users", to: "users#update_protocol"
       end
 
       resources :protocols, only: %i[index]
