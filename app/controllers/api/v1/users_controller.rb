@@ -38,6 +38,7 @@ class Api::V1::UsersController < ApplicationController
 
   def omniauth
     user = User.from_omniauth(params)
+    require 'pry'; binding.pry
     if user.valid?
       serialized_user = render json: UserSerializer.new(user)
     else

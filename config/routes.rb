@@ -16,8 +16,8 @@ Rails.application.routes.draw do
         resources :log_entries, only: [:index], controller: "users/log_entries"
         resources :protocols, only: %i[index show create]
       end
-      
 
+      resources :protocols, only: %i[index]
     end
   end
 end
