@@ -1,9 +1,11 @@
 class UserEditSerializer
   include JSONAPI::Serializer
-  attributes :name, :email, :data_sharing
+  attributes :name, :email
   attribute :protocol do |attr|
-    require 'pry'; binding.pry
-    attr[:protocol_name]
-    attr[:protocol_id]
+    { 
+      id: attr.protocol_id, 
+      name: attr.protocol_name 
+    }
   end
+  attribute :data_sharing
 end

@@ -28,10 +28,12 @@ class Api::V1::UsersController < ApplicationController
 
   def edit
     user = User.find(user_params[:user_id])
-    protocol = user.protocol
-    if user.valid? && !protocol.nil?
-      require 'pry'; binding.pry
-      render json: UserEditSerializer.new(UserProtocol.new(user, protocol))
+
+    if user.persisted? && !user.protocol.nil?
+      render json: UserEditSerializer.new(UserProtocol.new(user, user.protocol))
+    else
+      serialized_errors = ErrorSerializer.user_not_found
+      render json: serialized_errors, status: 404
     end
   end
 

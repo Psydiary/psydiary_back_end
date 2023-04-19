@@ -117,26 +117,38 @@ describe 'Users API', type: :request do
       @user = create(:user, protocol_id: protocol.id, ip_address: "73.153.161.252")
     end
     
-    it 'GET /api/v1/users/:id/settings' do
+    it 'Happy Path: GET /api/v1/users/:id/settings' do
       get "/api/v1/users/#{@user.id}/settings"
 
       expect(response.status).to eq(200)
 
       json = JSON.parse(response.body, symbolize_names: true)
-      
+
       data = json[:data]
       attributes = json[:data][:attributes]
 
       expect(data.keys).to eq([:id, :type, :attributes]) 
-      expect(data[:id]).to be_an Integer 
+      expect(data[:id]).to be_an String
       expect(data[:type]).to be_a String 
       expect(data[:attributes]).to be_a Hash 
       
       expect(attributes.keys).to eq([:name, :email, :protocol, :data_sharing]) 
       expect(attributes[:name]).to be_a String
       expect(attributes[:email]).to be_a String
+      expect(attributes[:data_sharing]).to be_a(TrueClass).or be_a(FalseClass)
       expect(attributes[:protocol]).to be_a Hash
-      expect(attributes[:data_sharing]).to be_a(TrueClass).or be_a(FalseClass) 
+      expect(attributes[:protocol][:id]).to be_a Integer
+      expect(attributes[:protocol][:name]).to be_a String
+    end
+
+    it 'Sad Path: GET /api/v1/users/:id/settings' do
+      get "/api/v1/users/one/settings"
+
+      expect(response.status).to eq(404)
+
+      json = JSON.parse(response.body, symbolize_names: true)
+
+      expect(json[:errors]).to eq("Couldn't find User with 'id'=one")
     end
   end
 
