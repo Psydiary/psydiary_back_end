@@ -18,15 +18,6 @@
 *** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
-
-
-
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
@@ -73,8 +64,6 @@
 
 
 ## About The Project
-
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
 
 Psydiary is a web application for users to track and journal their experiences with microdosing psychedelic mushrooms. The self reflection and data a user gathers on themselves is crucial to their journey. It will help them know what's working, if it’s time to change the frequency of their microdosing routine, or if they need a break from microdosing altogether. Users can document the following daily metrics;
 
@@ -249,24 +238,52 @@ Use this space to list resources you find helpful and would like to give credit 
 * [React Icons](https://react-icons.github.io/react-icons/search)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+## Contributors
+
+### PsyDiary Team
+<table>
+  <tr>
+    <td><img src="https://avatars.githubusercontent.com/torienyart"></td>
+    <td><img src="https://avatars.githubusercontent.com/Bobsters986"></td>
+    <td><img src="https://avatars.githubusercontent.com/4D-Coder"></td>
+    <td><img src="https://avatars.githubusercontent.com/davejm8"></td>
+    <td><img src="https://avatars.githubusercontent.com/sgwalker327"></td>
+  </tr>
+  <tr>
+    <td>Tori Enyart</td>
+    <td>Bobby Luly</td>
+    <td>Antonio King Hunt</td>
+    <td>David Marino</td>
+    <td>Sam Walker</td>
+  </tr>
+  <tr>
+    <td>
+      <a href="https://github.com/torienyart">GitHub</a><br>
+      <a href="https://www.linkedin.com/in/victoria-enyart-595052155/">LinkedIn</a>
+    </td>
+    <td>
+      <a href="https://github.com/Bobsters986">GitHub</a><br>
+      <a href="https://www.linkedin.com/in/bobbyy-luly-217653260/">LinkedIn</a>
+    </td>
+    <td>
+      <a href="https://github.com/4D-Coder">GitHub</a><br>
+      <a href="https://www.linkedin.com/in/antoniokinghunt/">LinkedIn</a>
+    </td>
+    <td>
+      <a href="https://github.com/davejm8">GitHub</a><br>
+      <a href="https://www.linkedin.com/in/davidjmarino8/">LinkedIn</a>
+    </td>
+    <td>
+      <a href="https://github.com/sgwalker327">GitHub</a><br>
+      <a href="https://www.linkedin.com/in/sam-walker-95a49630/">LinkedIn</a>
+    </td>
+  </tr>
+</table>
 
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/othneildrew/Best-README-Template.svg?style=for-the-badge
-[contributors-url]: https://github.com/othneildrew/Best-README-Template/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/othneildrew/Best-README-Template.svg?style=for-the-badge
-[forks-url]: https://github.com/othneildrew/Best-README-Template/network/members
-[stars-shield]: https://img.shields.io/github/stars/othneildrew/Best-README-Template.svg?style=for-the-badge
-[stars-url]: https://github.com/othneildrew/Best-README-Template/stargazers
-[issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=for-the-badge
-[issues-url]: https://github.com/othneildrew/Best-README-Template/issues
-[license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
-[license-url]: https://github.com/othneildrew/Best-README-Template/blob/master/LICENSE.txt
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/othneildrew
-[product-screenshot]: images/screenshot.png
 [Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
 [Next-url]: https://nextjs.org/
 [React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
