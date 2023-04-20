@@ -97,17 +97,9 @@ To build this web application, our team utilized;
 * Rails 7.0.4.3
 * PostgreSQL
 * Bootstrap
-* Docker
-* AWS
+* Heroku
+* New Relic
 
-* [![Next][Next.js]][Next-url]
-* [![React][React.js]][React-url]
-* [![Vue][Vue.js]][Vue-url]
-* [![Angular][Angular.io]][Angular-url]
-* [![Svelte][Svelte.dev]][Svelte-url]
-* [![Laravel][Laravel.com]][Laravel-url]
-* [![Bootstrap][Bootstrap.com]][Bootstrap-url]
-* [![JQuery][JQuery.com]][JQuery-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -132,7 +124,7 @@ To build this web application, our team utilized;
 
 _Follow the steps below to install and set up this app._
 
-1. NEEDS OUR API KEY EXAMPLES. Get a free API Key at [https://example.com](https://example.com)
+1. NEEDS a IPGEOLOCATION API KEY. Get a free API Key at [https://ipgeolocation.io/](https://ipgeolocation.io/)
 2. Clone this Repository
    ```sh
    git clone https://github.com/Bobsters986/psydiary_back_end
@@ -143,9 +135,9 @@ _Follow the steps below to install and set up this app._
     bundle exec figaro install
     rails db:{drop,create,migrate,seed}
     ```
-4. Enter your API in `application.yml`
+4. Enter your IPGeolocaiton API key in `application.yml`
    ```ruby
-   API_KEY = 'ENTER YOUR API';
+   ipgeo_api_key: 'ENTER YOUR API';
    ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -167,18 +159,18 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 ## Roadmap
 
 - [x] Add README
-- [ ] Add Root Page
+- [x] Add Root Page
 - [ ] Add Learn More Page
-- [ ] Add New User Page
-- [ ] Add User Login
-- [ ] User Dashboard
-- [ ] Protocol Show Page
-- [ ] User Edit Page
-- [ ] New Daily Log
-- [ ] New Microdose Diary
-- [ ] Daily Log/Microdose Index
-- [ ] Daily Log Show Page
-- [ ] Dose Show Page
+- [x] Add New User Page
+- [x] Add User Login
+- [x] User Dashboard
+- [x] Protocol Show Page
+- [x] User Edit Page
+- [x] New Daily Log
+- [x] New Microdose Diary
+- [x] Daily Log/Microdose Index
+- [x] Daily Log Show Page
+- [x] Dose Show Page
 - [ ] Resources/Discover Page
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -202,22 +194,10 @@ Don't forget to give the project a star! Thanks again!
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
-
-<!-- LICENSE -->
-## License
-
-Distributed under the MIT License. See `LICENSE.txt` for more information.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.com
-
-Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name)
+Project Link: [https://github.com/Psydiary/psydiary_back_end](https://github.com/Psydiary/psydiary_back_end)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -279,24 +259,3 @@ Use this space to list resources you find helpful and would like to give credit 
     </td>
   </tr>
 </table>
-
-
-
-<!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
-[Next-url]: https://nextjs.org/
-[React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
-[React-url]: https://reactjs.org/
-[Vue.js]: https://img.shields.io/badge/Vue.js-35495E?style=for-the-badge&logo=vuedotjs&logoColor=4FC08D
-[Vue-url]: https://vuejs.org/
-[Angular.io]: https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white
-[Angular-url]: https://angular.io/
-[Svelte.dev]: https://img.shields.io/badge/Svelte-4A4A55?style=for-the-badge&logo=svelte&logoColor=FF3E00
-[Svelte-url]: https://svelte.dev/
-[Laravel.com]: https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white
-[Laravel-url]: https://laravel.com
-[Bootstrap.com]: https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white
-[Bootstrap-url]: https://getbootstrap.com
-[JQuery.com]: https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white
-[JQuery-url]: https://jquery.com 
