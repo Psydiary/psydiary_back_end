@@ -213,9 +213,25 @@ describe 'Users API', type: :request do
             type: 'user_update',
             attributes: {
               email: @user2.email,
-              current_password: @current_password,
+              current_password: "passworddrowssap",
               new_password: "password321",
               password_conf: "password321",
+              data_sharing: 'true'
+            }
+          }
+        }
+      end
+
+      let(:invalid_combo) do
+        {
+          data: {
+            id: @user2.id,
+            type: 'user_update',
+            attributes: {
+              email: @user2.email,
+              current_password: @current_password,
+              new_password: "password321",
+              password_conf: "password322",
               data_sharing: 'true'
             }
           }
@@ -255,20 +271,22 @@ describe 'Users API', type: :request do
       #   expect(json[:errors]).to eq("Email cant be blank")
       # end
 
+      it "can return an error if the new password combo doesnt match" do
+        patch "/api/v1/users/#{@user2.id}/settings", params: invalid_combo
+
+        json = JSON.parse(response.body, symbolize_names: true)
+
+        expect(response.status).to eq(422)
+        expect(json[:errors]).to eq("Passwords must match")
+      end
+
       it "can return an error response when the current password given doesnt match or is missing" do
         patch "/api/v1/users/#{@user2.id}/settings", params: invalid_current_password
 
         json = JSON.parse(response.body, symbolize_names: true)
+
         expect(response.status).to eq(422)
-        expect(json[:errors]).to eq("Email cant be blank")
-      end
-
-      it "can return an error response when if either or both elements of the new password combo are missing" do
-
-      end
-      
-      it "can return an error if the new password combo doesnt match" do
-
+        expect(json[:errors]).to eq("Current Password is invalid")
       end
     end
   end

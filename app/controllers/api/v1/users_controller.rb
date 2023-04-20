@@ -50,9 +50,11 @@ class Api::V1::UsersController < ApplicationController
             @user.password = update_params[:new_password]
           else
             render json: ErrorSerializer.invalid_password, status: :unprocessable_entity
+            return
           end
         else
           render json: ErrorSerializer.invalid_combo, status: :unprocessable_entity
+          return
         end
       end
 
@@ -63,28 +65,6 @@ class Api::V1::UsersController < ApplicationController
         render json: { errors: e.message }, status: :unprocessable_entity
       end
     end
-    
-    # if update_params[:email].present?
-    #   if User.exists?(email: update_params[:email]) || @user.email != update_params[:email]
-    #     serialized_errors = ErrorSerializer.email_already_exists
-    #     render json: serialized_errors, status: :unprocessable_entity
-    #   elsif !User.exists?(email: update_params[:email]) || @user.email == update_params[:email]
-    #     @user.email = update_params[:email]
-    #     @user.data_sharing = update_params[:data_sharing]
-        
-    #     @user.save
-
-    #     redirect_to api_v1_user_settings_path(@user.id), notice: 'Update Successful'
-    #   end
-    # elsif !update_params[:email].present?
-
-    #   serialized_errors = ErrorSerializer.blank_email
-    #   render json: serialized_errors, status: :unprocessable_entity
-    # end
-    
-
-  #     
-  #   end
   end
 
   def omniauth
