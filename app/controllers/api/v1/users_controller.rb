@@ -38,18 +38,36 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def update_settings
-    @user = User.find(update_params[:user_id])
-    if update_params[:new_password].present? && update_params[:new_password] == update_params[:password_conf]
-      if BCrypt::Password.new(@user.password_digest) == update_params[:old_password]
-        @user.update(update_params.except(:old_password, :new_password, :password_conf, :user_id))
-        @user.password = update_params[:new_password]
-        
-        redirect_to api_v1_user_settings_path(@user.id), notice: 'Update Successful'
-      else
-        serialized_errors = ErrorSerializer.new(@user).serializable_hash[:data][:attributes]
+    @user = User.find(update_params[:user_id]) 
+    
+    if update_params[:email].present?
+      if User.exists?(email: update_params[:email]) || @user.email != update_params[:email]
+        serialized_errors = ErrorSerializer.email_already_exists
         render json: serialized_errors, status: :unprocessable_entity
+      elsif !User.exists?(email: update_params[:email]) || @user.email == update_params[:email]
+        @user.email = update_params[:email]
+        @user.data_sharing = update_params[:data_sharing]
+        @user.save
+
+        redirect_to api_v1_user_settings_path(@user.id), notice: 'Update Successful'
       end
+    elsif !update_params[:email].present?
+
+      serialized_errors = ErrorSerializer.blank_email
+      render json: serialized_errors, status: :unprocessable_entity
     end
+
+    # if BCrypt::Password.new(@user.password_digest) != update_params[:current_password]
+    #   serialized_errors = ErrorSerializer.current_password
+    #   render json: serialized_errors, status: :unprocessable_entity
+    # elsif update_params[:new_password] != update_params[:password_conf]
+    #   # error
+    # else
+    #   @user.update(update_params.except(:current_password, :new_password, :password_conf, :user_id))
+    #   @user.password = update_params[:new_password]
+    
+    #   redirect_to api_v1_user_settings_path(@user.id), notice: 'Update Successful'
+    # end
   end
 
   def omniauth
@@ -82,7 +100,7 @@ class Api::V1::UsersController < ApplicationController
       .require(:attributes)
       .permit(
         :email,
-        :old_password,
+        :current_password,
         :new_password,
         :password_conf,
         :data_sharing,
