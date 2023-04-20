@@ -9,7 +9,6 @@
 -->
 
 
-
 <!-- PROJECT SHIELDS -->
 <!--
 *** I'm using markdown "reference style" links for readability.
@@ -19,10 +18,11 @@
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
 <!-- PROJECT LOGO -->
+
 <br />
 <div align="center">
   <a href="https://github.com/Bobsters986/psydiary_back_end">
-    <img src="https://user-images.githubusercontent.com/116703107/231324854-f10370cc-90a6-4bfd-bd75-45017fc3cb31.png" alt="Logo" width="200" height="200">
+    <img src="https://user-images.githubusercontent.com/114954379/233477958-2d09ebc7-8585-4d78-8f5b-381fd976447c.png" height="200">
   </a>
 
   <h3 align="center">🍄 Psydiary—The App to Bring You Home 🍄</h3>
