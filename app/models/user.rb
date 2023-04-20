@@ -8,7 +8,7 @@ class User < ApplicationRecord
   validates_presence_of :name, :email, :password, :ip_address, :on => :create
   validates_uniqueness_of :email
 
-  # validate :legal_ip_location
+  validate :legal_ip_location
   
   enum role: %w(default manager admin)
 
@@ -31,15 +31,15 @@ class User < ApplicationRecord
 
   private
 
-  # def legal_ip_location
-  #   if ip_address.blank?
-  #     return
-  #   else
-  #     json = IPGeoLocationService.new.user_state(ip_address)
-  #     legal_states = ["Colorado", "California", "Oregon"]
-  #     return if legal_states.include?(json[:state_prov])
+  def legal_ip_location
+    if ip_address.blank?
+      return
+    else
+      json = IPGeoLocationService.new.user_state(ip_address)
+      legal_states = ["Colorado", "California", "Oregon"]
+      return if legal_states.include?(json[:state_prov])
   
-  #     errors.add(:base, "Must be in a state where psyilocybin use is legal to create an account")
-  #   end
-  # end
+      errors.add(:base, "Must be in a state where psyilocybin use is legal to create an account")
+    end
+  end
 end
