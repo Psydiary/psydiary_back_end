@@ -28,6 +28,18 @@ class ErrorSerializer
     {errors: "Incorrect password"}
   end
 
+  def self.invalid_combo
+    {errors: "Passwords must match"}
+  end
+
+  def self.blank_email
+    {errors: "Email cant be blank"}
+  end
+  
+  def self.invalid_password
+    {errors: "Current Password is invalid"}
+  end
+
   def self.wrong_login_type
     {errors: "It seems like you don't usually use a social account.... try again another way"}
   end
