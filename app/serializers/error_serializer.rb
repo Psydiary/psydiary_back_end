@@ -28,15 +28,15 @@ class ErrorSerializer
     {errors: "Incorrect password"}
   end
 
-  def self.email_already_exists
-    {errors: "Email already exists"}
+  def self.invalid_combo
+    {errors: "Passwords must match"}
   end
 
   def self.blank_email
     {errors: "Email cant be blank"}
   end
   
-  def self.current_password
+  def self.invalid_password
     {errors: "Current Password is invalid"}
   end
 

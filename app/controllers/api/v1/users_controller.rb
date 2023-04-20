@@ -40,34 +40,51 @@ class Api::V1::UsersController < ApplicationController
   def update_settings
     @user = User.find(update_params[:user_id]) 
     
-    if update_params[:email].present?
-      if User.exists?(email: update_params[:email]) || @user.email != update_params[:email]
-        serialized_errors = ErrorSerializer.email_already_exists
-        render json: serialized_errors, status: :unprocessable_entity
-      elsif !User.exists?(email: update_params[:email]) || @user.email == update_params[:email]
-        @user.email = update_params[:email]
-        @user.data_sharing = update_params[:data_sharing]
-        @user.save
+    begin
+      @user.email = update_params[:email] if !update_params[:email].nil?
+      @user.data_sharing = update_params[:data_sharing]
 
-        redirect_to api_v1_user_settings_path(@user.id), notice: 'Update Successful'
+      if update_params[:new_password].present?
+        if update_params[:new_password] == update_params[:password_conf]
+          if BCrypt::Password.new(@user.password_digest) == update_params[:current_password]
+            @user.password = update_params[:new_password]
+          else
+            render json: ErrorSerializer.invalid_password, status: :unprocessable_entity
+          end
+        else
+          render json: ErrorSerializer.invalid_combo, status: :unprocessable_entity
+        end
       end
-    elsif !update_params[:email].present?
 
-      serialized_errors = ErrorSerializer.blank_email
-      render json: serialized_errors, status: :unprocessable_entity
+      @user.save!
+      redirect_to api_v1_user_settings_path(@user.id), notice: 'Update Successful'
+    rescue ActiveRecord::RecordInvalid => e
+      if e
+        render json: { errors: e.message }, status: :unprocessable_entity
+      end
     end
-
-    # if BCrypt::Password.new(@user.password_digest) != update_params[:current_password]
-    #   serialized_errors = ErrorSerializer.current_password
-    #   render json: serialized_errors, status: :unprocessable_entity
-    # elsif update_params[:new_password] != update_params[:password_conf]
-    #   # error
-    # else
-    #   @user.update(update_params.except(:current_password, :new_password, :password_conf, :user_id))
-    #   @user.password = update_params[:new_password]
     
-    #   redirect_to api_v1_user_settings_path(@user.id), notice: 'Update Successful'
+    # if update_params[:email].present?
+    #   if User.exists?(email: update_params[:email]) || @user.email != update_params[:email]
+    #     serialized_errors = ErrorSerializer.email_already_exists
+    #     render json: serialized_errors, status: :unprocessable_entity
+    #   elsif !User.exists?(email: update_params[:email]) || @user.email == update_params[:email]
+    #     @user.email = update_params[:email]
+    #     @user.data_sharing = update_params[:data_sharing]
+        
+    #     @user.save
+
+    #     redirect_to api_v1_user_settings_path(@user.id), notice: 'Update Successful'
+    #   end
+    # elsif !update_params[:email].present?
+
+    #   serialized_errors = ErrorSerializer.blank_email
+    #   render json: serialized_errors, status: :unprocessable_entity
     # end
+    
+
+  #     
+  #   end
   end
 
   def omniauth
