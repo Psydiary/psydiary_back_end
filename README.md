@@ -52,11 +52,11 @@
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
+    <li><a href="#screenshots">Screenshots</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="#projects">Project Links</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
@@ -78,15 +78,20 @@ Psydiary is a web application for users to track and journal their experiences w
 
 Users can also gain insight from their microdose protocols and journal their experience through tracking;
 * Dosage
-* Time Taken
+* Intensity
 * Mood Before and After
 * Environment
 * Sociability
+* An AI generated journal prompt you can respond to
 
 Psydiary hopes to provide a structured way for users to track their experience with self-guided-treatment.
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+### Psydiary Back End API
 
+* This repo serves as an API and Database storage for our application's Microdose Protocols, Users, and user's log entries.
+* It consumes the IPGeolocation API, which we used to validate the location of our users before before they can create an account. This ensures the potential user resides in a state where psilocybin is is legal.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 ### Built With
@@ -145,15 +150,28 @@ _Follow the steps below to install and set up this app._
 
 
 <!-- USAGE EXAMPLES -->
-## Usage
+## Screenshots
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+### Schema
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+Schema: <img src= "https://user-images.githubusercontent.com/116703107/233485522-12c89f31-219f-46fb-9a45-ad508f49183c.png" height="300" width="400">
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+<!-- Testing -->
+## Testing
 
+* This project utilizes RSpec testing
+* After cloning this repo and following the steps above to install all necessary gems and API keys:
+** Run the entire test suite using the command `bundle exec rspec`
+
+<!-- JSON Contract -->
+### JSON contract/endpoints
+
+JSON Contract Gist: [https://gist.github.com/4D-Coder/72e8d31c4b2b266d8f7ec95a7e411295](https://gist.github.com/4D-Coder/72e8d31c4b2b266d8f7ec95a7e411295)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- ROADMAP -->
 ## Roadmap
@@ -195,9 +213,13 @@ Don't forget to give the project a star! Thanks again!
 
 
 <!-- CONTACT -->
-## Contact
+## Projects
 
-Project Link: [https://github.com/Psydiary/psydiary_back_end](https://github.com/Psydiary/psydiary_back_end)
+Back End Project Link: [https://github.com/Psydiary/psydiary_back_end](https://github.com/Psydiary/psydiary_back_end)
+Back End Heroku: [https://dashboard.heroku.com/apps/pacific-reef-79035](https://dashboard.heroku.com/apps/pacific-reef-79035)
+
+Front End Project Link: [https://github.com/Psydiary/psydiary_front_end](https://github.com/Psydiary/psydiary_front_end)
+Front End Heroku: [https://secure-crag-03925.herokuapp.com/](https://secure-crag-03925.herokuapp.com/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
