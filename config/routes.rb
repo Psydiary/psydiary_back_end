@@ -13,7 +13,7 @@ Rails.application.routes.draw do
       resources :users, only: [:show, :create] do
         get 'settings', to: 'users#edit'
         patch 'settings', to: 'users#update_settings'
-        resources :microdose_log_entries, only: %i[show index create], controller: "users/microdose_log_entries"
+        resources :microdose_log_entries, only: %i[show create], controller: "users/microdose_log_entries"
         resources :daily_log_entries, only: %i[show create], controller: "users/daily_log_entries"
         resources :log_entries, only: [:index], controller: "users/log_entries"
         resources :protocols, only: %i[index show create]
