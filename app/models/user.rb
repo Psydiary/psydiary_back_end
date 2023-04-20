@@ -6,6 +6,7 @@ class User < ApplicationRecord
   has_secure_password
 
   validates_presence_of :name, :email, :password, :ip_address, :on => :create
+
   validates_uniqueness_of :email
 
   validate :legal_ip_location

@@ -37,6 +37,7 @@ class Api::V1::UsersController < ApplicationController
     end
   end
 
+
   def update_protocol
     user = User.find(params[:id])
     if user.update(protocol_id: params[:protocol_id])
@@ -44,6 +45,36 @@ class Api::V1::UsersController < ApplicationController
     else
       serialized_errors = ErrorSerializer.new(user).serializable_hash[:data][:attributes]
       render json: serialized_errors, status: :unprocessable_entity
+    end
+  end
+
+  def update_settings
+    @user = User.find(update_params[:user_id]) 
+    
+    begin
+      @user.email = update_params[:email] if !update_params[:email].nil?
+      @user.data_sharing = update_params[:data_sharing]
+
+      if update_params[:new_password].present?
+        if update_params[:new_password] == update_params[:password_conf]
+          if BCrypt::Password.new(@user.password_digest) == update_params[:current_password]
+            @user.password = update_params[:new_password]
+          else
+            render json: ErrorSerializer.invalid_password, status: :unprocessable_entity
+            return
+          end
+        else
+          render json: ErrorSerializer.invalid_combo, status: :unprocessable_entity
+          return
+        end
+      end
+
+      @user.save!
+      redirect_to api_v1_user_settings_path(@user.id), notice: 'Update Successful'
+    rescue ActiveRecord::RecordInvalid => e
+      if e
+        render json: { errors: e.message }, status: :unprocessable_entity
+      end
     end
   end
 
@@ -60,6 +91,28 @@ class Api::V1::UsersController < ApplicationController
   private
 
     def user_params
-      params.permit(:name, :user_id, :email, :password, :protocol_id, :data_sharing, :ip_address)
+      params.permit(
+        :name, 
+        :user_id, 
+        :email, 
+        :password, 
+        :protocol_id, 
+        :data_sharing, 
+        :ip_address
+      )
+    end
+
+    def update_params
+      params
+      .require(:data)
+      .require(:attributes)
+      .permit(
+        :email,
+        :current_password,
+        :new_password,
+        :password_conf,
+        :data_sharing,
+      )
+      .merge(user_id: params[:user_id])
     end
 end

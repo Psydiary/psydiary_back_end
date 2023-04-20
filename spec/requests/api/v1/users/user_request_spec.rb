@@ -170,4 +170,143 @@ describe 'Users API', type: :request do
       expect(json[:data][:attributes][:protocol_id]).to eq(@p1.id)
     end
   end
+
+  describe '#update_settings' do
+    context "Happy Path: PATCH api/v1/users/:id/settings" do
+      before do
+        @current_password = "password123"
+        @user = create(:user, protocol_id: create(:protocol).id, ip_address: "73.153.161.252", password: @current_password, data_sharing: false)
+      end
+
+      let(:expected_request_body) do
+        {
+          data: {
+            id: @user.id,
+            type: 'user_update',
+            attributes: {
+              email: @user.email,
+              current_password: @current_password,
+              new_password: 'password321',
+              password_conf: 'password321',
+              data_sharing: 'true'
+            }
+          }
+        }
+      end
+
+      it "it can receive valid update json and redirect with success message" do
+        patch "/api/v1/users/#{@user.id}/settings", params: expected_request_body 
+
+        expect(response).to have_http_status(:redirect)
+        expect(response).to redirect_to(api_v1_user_settings_path(@user.id))
+      end
+    end
+
+    context "Sad Path: PATCH api/v1/users/:id/settings" do
+      before do
+        @current_password = "password123"
+        @user1 = create(:user, protocol_id: create(:protocol).id, ip_address: "73.153.161.252", password: @current_password, data_sharing: false)
+        @user2 = create(:user, protocol_id: create(:protocol).id, ip_address: "73.153.161.252", password: @current_password, data_sharing: false)
+      end
+
+      let(:duplicate_email_request) do
+        {
+          data: {
+            id: @user2.id,
+            type: 'user_update',
+            attributes: {
+              email: @user1.email,
+              current_password: nil,
+              new_password: nil,
+              password_conf: nil,
+              data_sharing: 'true'
+            }
+          }
+        }
+      end
+
+      let(:invalid_current_password) do
+        {
+          data: {
+            id: @user2.id,
+            type: 'user_update',
+            attributes: {
+              email: @user2.email,
+              current_password: "passworddrowssap",
+              new_password: "password321",
+              password_conf: "password321",
+              data_sharing: 'true'
+            }
+          }
+        }
+      end
+
+      let(:invalid_combo) do
+        {
+          data: {
+            id: @user2.id,
+            type: 'user_update',
+            attributes: {
+              email: @user2.email,
+              current_password: @current_password,
+              new_password: "password321",
+              password_conf: "password322",
+              data_sharing: 'true'
+            }
+          }
+        }
+      end
+
+      let(:blank_email) do
+        {
+          data: {
+            id: @user2.id,
+            type: 'user_update',
+            attributes: {
+              email: nil,
+              current_password: @current_password,
+              new_password: "password321",
+              password_conf: "password321",
+              data_sharing: 'true'
+            }
+          }
+        }
+      end
+    
+      it "can return an error response when the email was already taken" do
+        patch "/api/v1/users/#{@user2.id}/settings", params: duplicate_email_request
+        
+        json = JSON.parse(response.body, symbolize_names: true)
+
+        expect(response.status).to eq(422)
+        expect(json[:errors]).to eq("Validation failed: Email has already been taken")
+      end
+
+      # it "can return an error if email is blank" do
+      #   patch "/api/v1/users/#{@user2.id}/settings", params: blank_email
+      #   require 'pry'; binding.pry
+      #   json = JSON.parse(response.body, symbolize_names: true)
+      #   expect(response.status).to eq(422)
+      #   expect(json[:errors]).to eq("Email cant be blank")
+      # end
+
+      it "can return an error if the new password combo doesnt match" do
+        patch "/api/v1/users/#{@user2.id}/settings", params: invalid_combo
+
+        json = JSON.parse(response.body, symbolize_names: true)
+
+        expect(response.status).to eq(422)
+        expect(json[:errors]).to eq("Passwords must match")
+      end
+
+      it "can return an error response when the current password given doesnt match or is missing" do
+        patch "/api/v1/users/#{@user2.id}/settings", params: invalid_current_password
+
+        json = JSON.parse(response.body, symbolize_names: true)
+
+        expect(response.status).to eq(422)
+        expect(json[:errors]).to eq("Current Password is invalid")
+      end
+    end
+  end
 end
