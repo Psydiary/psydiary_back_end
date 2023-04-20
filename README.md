@@ -1,24 +1,6 @@
-<!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
 <a name="readme-top"></a>
-<!--
-*** Thanks for checking out the Best-README-Template. If you have a suggestion
-*** that would make this better, please fork the repo and create a pull request
-*** or simply open an issue with the tag "enhancement".
-*** Don't forget to give the project a star!
-*** Thanks again! Now go create something AMAZING! :D
--->
 
-
-<!-- PROJECT SHIELDS -->
-<!--
-*** I'm using markdown "reference style" links for readability.
-*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
-*** See the bottom of this document for the declaration of the reference variables
-*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
-*** https://www.markdownguide.org/basic-syntax/#reference-style-links
--->
 <!-- PROJECT LOGO -->
-
 <br />
 <div align="center">
   <a href="https://github.com/Bobsters986/psydiary_back_end">
@@ -32,7 +14,6 @@
     <br />
   </p>
 </div>
-
 
 
 <!-- TABLE OF CONTENTS -->
@@ -52,14 +33,13 @@
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
-    <li><a href="#psydiary schema">Psydiary Schema</a></li>
+    <li><a href="#psydiary_schema">Psydiary Schema</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#projects">Project Links</a></li>
     <li><a href="#acknowledgements">Acknowlegdements</a></li>
   </ol>
 </details>
-
 
 
 ## About The Project
@@ -84,6 +64,7 @@ Users can also gain insight from their microdose protocols and journal their exp
 * Journal Response to an AI Generated Prompt
 
 Psydiary hopes to provide a structured way for users to track their experience with self-guided-treatment.
+
 
 ### App Design: Psydiary Back End API
 
@@ -110,10 +91,8 @@ To build this web application, our team utilized;
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
-
 ## Getting Started
 <!-- can change this later or add more detail -->
-
 ### Prerequisites
 
 * Ruby
@@ -125,6 +104,7 @@ To build this web application, our team utilized;
   ```sh
   Rails 7.0.4.3
   ```
+
 
 ### Installation
 
@@ -149,7 +129,6 @@ _Follow the steps below to install and set up this app._
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
-
 <!-- USAGE EXAMPLES -->
 ## Psydiary Schema
 
@@ -162,12 +141,14 @@ _Follow the steps below to install and set up this app._
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+
 <!-- Testing -->
 ## Testing
 
 * This project utilizes RSpec testing
 * After cloning this repo and following the steps above to install all necessary gems and API keys:
-* * Run the entire test suite using the command `bundle exec rspec`
+  * Run the entire test suite using the command `bundle exec rspec`
+
 
 <!-- JSON Contract -->
 ### Endpoint Details
@@ -175,6 +156,7 @@ _Follow the steps below to install and set up this app._
 JSON Contract Gist: [https://gist.github.com/4D-Coder/72e8d31c4b2b266d8f7ec95a7e411295](https://gist.github.com/4D-Coder/72e8d31c4b2b266d8f7ec95a7e411295)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 
 <!-- ROADMAP -->
 ## Roadmap
@@ -207,11 +189,11 @@ Don't forget to give the project a star! Thanks again!
 <!-- CONTACT -->
 ## Projects
 
-* Back End Project Link: [https://github.com/Psydiary/psydiary_back_end](https://github.com/Psydiary/psydiary_back_end)
-* Back End Heroku: [https://dashboard.heroku.com/apps/pacific-reef-79035](https://dashboard.heroku.com/apps/pacific-reef-79035)
+* [Back End Repo](https://github.com/Psydiary/psydiary_back_end)
+* [Back End Heroku](https://dashboard.heroku.com/apps/pacific-reef-79035)
 
-* Front End Project Link: [https://github.com/Psydiary/psydiary_front_end](https://github.com/Psydiary/psydiary_front_end)
-* Front End Heroku: [https://secure-crag-03925.herokuapp.com/](https://secure-crag-03925.herokuapp.com/)
+* [Front End Repo](https://github.com/Psydiary/psydiary_front_end)
+* [Front End Heroku](https://secure-crag-03925.herokuapp.com/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -257,3 +239,5 @@ Don't forget to give the project a star! Thanks again!
     </td>
   </tr>
 </table>
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
