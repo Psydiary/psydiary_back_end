@@ -52,10 +52,9 @@
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
-    <li><a href="#psydiary">Psydiary Schema</a></li>
+    <li><a href="#psydiary schema">Psydiary Schema</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
     <li><a href="#projects">Project Links</a></li>
     <li><a href="#acknowledgements">Acknowlegdements</a></li>
   </ol>
@@ -88,7 +87,7 @@ Psydiary hopes to provide a structured way for users to track their experience w
 
 ### App Design: Psydiary Back End API
 
-* This repo serves as an API and Database storage for our[front end application's](https://github.com/Psydiary/psydiary_front_end) Microdose Protocols, Users, and user's log entries.
+* This repo serves as an API and Database storage for our [front end application](https://github.com/Psydiary/psydiary_front_end)'s Microdose Protocols, Users, and user's log entries.
 * It consumes the IPGeolocation API, which we used to validate the location of our users before before they can create an account. This ensures the potential user resides in a state where psilocybin is is legal.
 
 ![Screen Shot 2023-04-20 at 1 24 27 PM](https://user-images.githubusercontent.com/116821829/233442087-cea5421d-4098-4452-a937-d62d04d5fdcf.png)
@@ -158,6 +157,7 @@ _Follow the steps below to install and set up this app._
   <a href="https://miro.com/app/board/uXjVMUDieY4=/">
     <img src= "https://user-images.githubusercontent.com/116703107/233499169-b57a55f5-e88c-4c61-9578-5c371a7f8874.png" height="300" width="400">
   </a>
+</div>
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -167,7 +167,7 @@ _Follow the steps below to install and set up this app._
 
 * This project utilizes RSpec testing
 * After cloning this repo and following the steps above to install all necessary gems and API keys:
-** Run the entire test suite using the command `bundle exec rspec`
+* * Run the entire test suite using the command `bundle exec rspec`
 
 <!-- JSON Contract -->
 ### Endpoint Details
