@@ -158,17 +158,16 @@ describe 'Users API', type: :request do
       @p2 = Protocol.create!(name: "Nightcap", description: "take at night", days_between_dose: 3, dosage: 0.2, protocol_duration: 4, break_duration: 3, other_notes: "Taken in the evening")
       @u1 = User.create!(name: "Existing User", email: "existing_user@gmail.com", password: "1234", protocol_id: @p1.id, ip_address: "73.153.161.252")
       @u4 = User.create!(name: "Existing User 2", email: "existing_user_2@gmail.com", password: "1234", protocol_id: @p1.id, ip_address: "73.153.161.252")
-      @u2 = attributes_for(:user)
-      @u3 = attributes_for(:user, protocol_id: @p2.id)
+      @params = {id: @u1.id, protocol_id: @p1.id}
     end
 
     it "PATCH users/:user_id/users" do
-      patch "/api/v1/users/#{@u1.id}/update_protocol", params: @u3
+      patch "/api/v1/users/#{@u1.id}/update_protocol", params: @params
       json = JSON.parse(response.body, symbolize_names: true)
-      
+
       expect(response.status).to eq(200)
       expect(json[:data][:attributes].keys).to include(:name, :email, :protocol_id, :data_sharing)
-      expect(json[:data][:attributes][:protocol_id]).to eq(@p2[:protocol_id])
+      expect(json[:data][:attributes][:protocol_id]).to eq(@p1.id)
     end
   end
 end
