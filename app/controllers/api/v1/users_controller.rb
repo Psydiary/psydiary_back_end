@@ -37,6 +37,17 @@ class Api::V1::UsersController < ApplicationController
     end
   end
 
+
+  def update_protocol
+    user = User.find(params[:id])
+    if user.update(protocol_id: params[:protocol_id])
+      serialized_user = render json: UserSerializer.new(user)
+    else
+      serialized_errors = ErrorSerializer.new(user).serializable_hash[:data][:attributes]
+      render json: serialized_errors, status: :unprocessable_entity
+    end
+  end
+
   def update_settings
     @user = User.find(update_params[:user_id]) 
     
