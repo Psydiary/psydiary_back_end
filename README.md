@@ -1,38 +1,22 @@
-<!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
 <a name="readme-top"></a>
-<!--
-*** Thanks for checking out the Best-README-Template. If you have a suggestion
-*** that would make this better, please fork the repo and create a pull request
-*** or simply open an issue with the tag "enhancement".
-*** Don't forget to give the project a star!
-*** Thanks again! Now go create something AMAZING! :D
--->
 
-
-<!-- PROJECT SHIELDS -->
-<!--
-*** I'm using markdown "reference style" links for readability.
-*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
-*** See the bottom of this document for the declaration of the reference variables
-*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
-*** https://www.markdownguide.org/basic-syntax/#reference-style-links
--->
 <!-- PROJECT LOGO -->
-
 <br />
 <div align="center">
-  <a href="https://github.com/Bobsters986/psydiary_back_end">
+  <a href="https://secure-crag-03925.herokuapp.com/">
     <img src="https://user-images.githubusercontent.com/114954379/233477958-2d09ebc7-8585-4d78-8f5b-381fd976447c.png" height="200">
   </a>
-
+  
+  [Visit Psydiary Today!](https://secure-crag-03925.herokuapp.com/)
+<br>
   <h3 align="center">🍄 Psydiary—The App to Bring You Home 🍄</h3>
-
+<br>
   <p align="center">
     An app to track your psilocybin microdosing protocol with everything from daily mood metrics and monthly trend representation to AI generated journal prompts.
     <br />
   </p>
 </div>
-
+<br>
 
 
 <!-- TABLE OF CONTENTS -->
@@ -52,15 +36,13 @@
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
+    <li><a href="#schema">Psydiary Schema</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
+    <li><a href="#projects">Project Links</a></li>
+    <li><a href="#acknowledgements">Acknowlegdements</a></li>
   </ol>
 </details>
-
 
 
 ## About The Project
@@ -78,15 +60,23 @@ Psydiary is a web application for users to track and journal their experiences w
 
 Users can also gain insight from their microdose protocols and journal their experience through tracking;
 * Dosage
-* Time Taken
+* Intensity
 * Mood Before and After
 * Environment
 * Sociability
+* Journal Response to an AI Generated Prompt
 
 Psydiary hopes to provide a structured way for users to track their experience with self-guided-treatment.
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+### App Design: Psydiary Back End API
+
+* This repo serves as an API and Database storage for our [front end application](https://github.com/Psydiary/psydiary_front_end)'s Microdose Protocols, Users, and user's log entries.
+* It consumes the IPGeolocation API, which we used to validate the location of our users before before they can create an account. This ensures the potential user resides in a state where psilocybin is is legal.
+
+![Screen Shot 2023-04-20 at 1 24 27 PM](https://user-images.githubusercontent.com/116821829/233442087-cea5421d-4098-4452-a937-d62d04d5fdcf.png)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 ### Built With
@@ -104,10 +94,8 @@ To build this web application, our team utilized;
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
-
 ## Getting Started
 <!-- can change this later or add more detail -->
-
 ### Prerequisites
 
 * Ruby
@@ -119,6 +107,7 @@ To build this web application, our team utilized;
   ```sh
   Rails 7.0.4.3
   ```
+
 
 ### Installation
 
@@ -143,38 +132,44 @@ _Follow the steps below to install and set up this app._
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
-
 <!-- USAGE EXAMPLES -->
-## Usage
+## Schema
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+<div align="center">
+  <a href="https://miro.com/app/board/uXjVMUDieY4=/">
+    <img src= "https://user-images.githubusercontent.com/116703107/233499169-b57a55f5-e88c-4c61-9578-5c371a7f8874.png" height="300" width="400">
+  </a>
+</div>
 
-_For more examples, please refer to the [Documentation](https://example.com)_
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+
+<!-- Testing -->
+## Testing
+
+* This project utilizes RSpec testing
+* After cloning this repo and following the steps above to install all necessary gems and API keys:
+  * Run the entire test suite using the command `bundle exec rspec`
+
+
+<!-- JSON Contract -->
+### Endpoint Details
+
+JSON Contract Gist: [https://gist.github.com/4D-Coder/72e8d31c4b2b266d8f7ec95a7e411295](https://gist.github.com/4D-Coder/72e8d31c4b2b266d8f7ec95a7e411295)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 <!-- ROADMAP -->
 ## Roadmap
 
-- [x] Add README
-- [x] Add Root Page
-- [ ] Add Learn More Page
-- [x] Add New User Page
-- [x] Add User Login
-- [x] User Dashboard
-- [x] Protocol Show Page
-- [x] User Edit Page
-- [x] New Daily Log
-- [x] New Microdose Diary
-- [x] Daily Log/Microdose Index
-- [x] Daily Log Show Page
-- [x] Dose Show Page
-- [ ] Resources/Discover Page
+To keep track of our progress while creating Psydiary, bugs that popped up, potential refactor ideas, and more... we utilized a [Notion Project Management Board](https://alluring-phlox-b74.notion.site/72a9807f1fec4b40a63d0fc8908cb7e8?v=aec33fee246f41b5bf8e7ae6ea7f9796) from Day 1.
+
+We also used tools like [Miro](https://miro.com/app/board/uXjVMUDieY4=/) to diagram our database and service structure and Figma to create our wireframes.
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 
 
 <!-- CONTRIBUTING -->
@@ -195,14 +190,18 @@ Don't forget to give the project a star! Thanks again!
 
 
 <!-- CONTACT -->
-## Contact
+## Projects
 
-Project Link: [https://github.com/Psydiary/psydiary_back_end](https://github.com/Psydiary/psydiary_back_end)
+* [Back End Repo](https://github.com/Psydiary/psydiary_back_end)
+* [Back End Heroku](https://dashboard.heroku.com/apps/pacific-reef-79035)
+
+* [Front End Repo](https://github.com/Psydiary/psydiary_front_end)
+* [Front End Heroku](https://secure-crag-03925.herokuapp.com/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
-## Contributors
+## Acknowledgements
 
 ### PsyDiary Team
 <table>
@@ -243,3 +242,5 @@ Project Link: [https://github.com/Psydiary/psydiary_back_end](https://github.com
     </td>
   </tr>
 </table>
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
